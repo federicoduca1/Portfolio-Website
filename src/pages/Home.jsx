@@ -1,3 +1,6 @@
+import IdentityBlock from '../components/home/IdentityBlock.jsx';
+import { homeContent } from '../data/homeContent.js';
+
 export default function Home() {
-  return <h1>Home</h1>;
+  return <IdentityBlock content={homeContent} />;
 }
