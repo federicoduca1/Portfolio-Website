@@ -102,4 +102,22 @@ export const homeContent = {
       },
     ],
   },
+  closing: {
+    contact: {
+      title: "Let's build something meaningful together.",
+      description:
+        'Open to thoughtful collaborations, design conversations and digital experiences with a clear purpose.',
+      methods: [
+        { label: 'Email', value: 'hello@example.com', primary: true },
+        { label: 'LinkedIn', value: 'Professional profile' },
+        { label: 'Behance', value: 'Selected visual work' },
+      ],
+      cta: 'Contact',
+    },
+    about: {
+      intro: 'Now let me introduce myself.',
+      name: 'FedericoDuca',
+      cta: 'About',
+    },
+  },
 };

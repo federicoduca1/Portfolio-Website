@@ -12,3 +12,116 @@ body {
   margin: 0;
   min-width: 320px;
 }
+
+.playground-carousel {
+  scrollbar-color: #0a0a0a #e5e5e5;
+  scrollbar-width: thin;
+}
+
+.playground-carousel::-webkit-scrollbar {
+  height: 2px;
+}
+
+.playground-carousel::-webkit-scrollbar-track {
+  background: #e5e5e5;
+}
+
+.playground-carousel::-webkit-scrollbar-thumb {
+  background: #0a0a0a;
+}
+
+.home-about-name {
+  display: inline-block;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: rgb(250 250 250 / 0.38);
+  cursor: pointer;
+  font-family: var(--font-display, inherit);
+  font-size: clamp(3.25rem, 12vw, 10.5rem);
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+  margin-inline: -0.04em;
+  padding: 0.04em;
+  text-rendering: geometricPrecision;
+  transition: color 360ms ease;
+}
+
+.home-about-name__base,
+.home-about-name__fill {
+  display: block;
+  white-space: nowrap;
+}
+
+.home-about-name__base {
+  position: relative;
+  z-index: 1;
+}
+
+.home-about-name__band,
+.home-about-name__fill {
+  transition:
+    clip-path 1100ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 300ms ease;
+}
+
+.home-about-name__band {
+  position: absolute;
+  z-index: 2;
+  top: 18%;
+  bottom: 14%;
+  left: 0;
+  width: 100%;
+  background: rgb(250 250 250 / 0.16);
+  clip-path: inset(0 0 0 100%);
+  opacity: 1;
+}
+
+.home-about-name__fill {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  padding: inherit;
+  color: #fafafa;
+  clip-path: inset(0 100% 0 0);
+  opacity: 1;
+}
+
+.home-about-name:hover .home-about-name__band,
+.home-about-name:focus-visible .home-about-name__band {
+  clip-path: inset(0 0 0 0);
+}
+
+.home-about-name:hover .home-about-name__fill,
+.home-about-name:focus-visible .home-about-name__fill {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .home-about-name {
+    color: rgb(250 250 250 / 0.78);
+  }
+
+  .home-about-name__band,
+  .home-about-name__fill {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-about-name,
+  .home-about-name__band,
+  .home-about-name__fill {
+    transition: none;
+  }
+
+  .home-about-name__band {
+    display: none;
+  }
+
+  .home-about-name:focus-visible .home-about-name__fill,
+  .home-about-name:hover .home-about-name__fill {
+    clip-path: none;
+  }
+}

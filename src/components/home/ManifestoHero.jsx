@@ -29,7 +29,7 @@ export default function ManifestoHero({ manifesto }) {
       <div className="mx-auto w-full max-w-7xl text-left sm:text-center">
         <h1
           id="home-manifesto"
-          className="text-[clamp(1.55rem,7vw,1.875rem)] font-semibold leading-[1.12] tracking-[0.005em] text-neutral-950 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+          className="text-[clamp(1rem,5.35vw,1.875rem)] font-semibold leading-[1.12] tracking-[0.005em] text-neutral-950 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
         >
           {manifestoLines.map((line, lineIndex) => (
             <span

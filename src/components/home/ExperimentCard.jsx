@@ -1,6 +1,6 @@
 export default function ExperimentCard({ experiment }) {
   return (
-    <article className="min-w-0">
+    <article className="w-56 shrink-0 sm:w-60 lg:w-64">
       <div
         aria-hidden="true"
         className="aspect-square bg-neutral-200"
