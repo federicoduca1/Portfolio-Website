@@ -1,11 +1,29 @@
 export const homeContent = {
-  manifesto: [
-    { text: 'I design meaningful ' },
-    { text: 'digital experiences', keyword: 'digital-experiences' },
-    { text: ' by turning ' },
-    { text: 'technology', keyword: 'technology' },
-    { text: ' into intuitive, engaging and human interactions.' },
-  ],
+  manifesto: {
+    segments: [
+      { text: 'I design meaningful ' },
+      { text: 'digital experiences', keywordId: 'digital-experiences' },
+      { text: ' by turning ' },
+      { text: 'technology', keywordId: 'technology' },
+      { text: ' into intuitive, engaging and human interactions.' },
+    ],
+    keywords: [
+      {
+        id: 'digital-experiences',
+        label: 'digital experiences',
+        title: 'Beyond interfaces',
+        description:
+          'I explore products, interactive systems, games and emerging mediums to understand how people experience technology in different contexts.',
+      },
+      {
+        id: 'technology',
+        label: 'technology',
+        title: 'A medium for exploration',
+        description:
+          'I use code and prototyping to test ideas, understand technical constraints and turn design decisions into working experiences.',
+      },
+    ],
+  },
   designPhilosophy: {
     title: 'Design Philosophy',
     description:

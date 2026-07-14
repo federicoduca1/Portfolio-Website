@@ -23,7 +23,7 @@ function NavigationLink({ item, onClick }) {
       onClick={onClick}
       className={({ isActive }) =>
         [
-          'rounded-sm px-3 py-2 text-sm font-medium transition-colors duration-200',
+          'rounded-sm px-3 py-2 text-base font-medium transition-colors duration-200 md:text-lg',
           'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950',
           isActive ? 'text-neutral-950' : 'text-neutral-500 hover:text-neutral-950',
         ].join(' ')
@@ -135,7 +135,7 @@ export default function Navbar() {
       >
         <nav
           aria-label="Global navigation"
-          className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
+          className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-5 sm:px-6 sm:py-6 lg:px-8"
         >
           <div className="flex items-center">
             <PersonalSignature />
@@ -155,7 +155,7 @@ export default function Navbar() {
             type="button"
             aria-controls="mobile-navigation"
             aria-expanded={isMobileMenuOpen}
-            className="rounded-md border border-neutral-300 px-3 py-2 text-sm font-medium text-neutral-800 md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
+            className="rounded-md border border-neutral-300 px-3 py-2 text-base font-medium text-neutral-800 md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
             onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
           >
             {isMobileMenuOpen ? 'Close' : 'Menu'}
@@ -175,7 +175,7 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
-      <div aria-hidden="true" className="h-28" />
+      <div aria-hidden="true" className="h-32" />
     </>
   );
 }

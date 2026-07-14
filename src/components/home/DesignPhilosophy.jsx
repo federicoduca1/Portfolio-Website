@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import DesignPrinciple from './DesignPrinciple.jsx';
+import { useDesignPhilosophyScroll } from '../../hooks/useDesignPhilosophyScroll.js';
 
 function SectionHeader({ title, description }) {
   return (
@@ -17,12 +19,20 @@ function SectionHeader({ title, description }) {
 }
 
 export default function DesignPhilosophy({ content }) {
+  const sectionRef = useRef(null);
+
+  useDesignPhilosophyScroll(sectionRef);
+
   return (
     <section
+      ref={sectionRef}
       aria-labelledby="design-philosophy"
       className="pb-20 sm:pb-24 lg:pb-32"
     >
-      <div className="space-y-14 sm:space-y-16 lg:space-y-20">
+      <div
+        data-design-philosophy-story
+        className="space-y-14 sm:space-y-16 lg:space-y-20"
+      >
         <SectionHeader
           title={content.title}
           description={content.description}
