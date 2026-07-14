@@ -211,7 +211,29 @@ Light gray.
 
 ## Accent Color
 
-Use a single accent color.
+The global accent system uses `accent-600: #3B83F6` as its primary tone.
+
+Tonal scale:
+
+* `accent-50: #EFF6FF`
+* `accent-100: #DBEAFE`
+* `accent-200: #BFDBFE`
+* `accent-300: #93C5FD`
+* `accent-400: #60A5FA`
+* `accent-500: #4B92F7`
+* `accent-600: #3B83F6`
+* `accent-700: #2568DC`
+* `accent-800: #1F54B5`
+* `accent-900: #1D438E`
+
+Semantic aliases:
+
+* `accent`: primary active state
+* `accent-hover`: accessible accent text and hover state
+* `accent-active`: pressed state
+* `accent-soft`: subtle accent surface
+* `focus-ring`: keyboard focus
+* `link-hover`: reusable primary-link hover
 
 Purpose:
 
@@ -219,9 +241,14 @@ Purpose:
 * links
 * active states
 * selected filters
+* progress indicators
 * subtle highlights
 
-The accent color should never dominate the interface.
+Use accent on small interactive states, markers and structural details. Keep
+large surfaces, body copy, inactive navigation, section backgrounds and
+decorative ambient icons neutral. Prefer `accent-700` or darker for normal-size
+accent text on white; `accent-600` is reserved for large text, indicators,
+underlines and focus rings.
 
 It supports interaction, not branding.
 

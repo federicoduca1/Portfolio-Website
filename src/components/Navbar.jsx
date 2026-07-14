@@ -24,7 +24,7 @@ function NavigationLink({ item, onClick }) {
       className={({ isActive }) =>
         [
           'rounded-sm px-3 py-2 text-base font-medium transition-colors duration-200 md:text-lg',
-          'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950',
+          'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
           isActive ? 'text-neutral-950' : 'text-neutral-500 hover:text-neutral-950',
         ].join(' ')
       }
@@ -34,7 +34,7 @@ function NavigationLink({ item, onClick }) {
           <span>{item.label}</span>
           <span
             className={[
-              'mt-1 h-px w-full origin-left bg-neutral-950 transition-all duration-200 ease-out',
+              'mt-1 h-px w-full origin-left bg-accent-600 transition-all duration-200 ease-out',
               isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0',
             ].join(' ')}
           />
@@ -155,7 +155,7 @@ export default function Navbar() {
             type="button"
             aria-controls="mobile-navigation"
             aria-expanded={isMobileMenuOpen}
-            className="rounded-md border border-neutral-300 px-3 py-2 text-base font-medium text-neutral-800 md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
+            className="rounded-md border border-neutral-300 px-3 py-2 text-base font-medium text-neutral-800 md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
             onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
           >
             {isMobileMenuOpen ? 'Close' : 'Menu'}

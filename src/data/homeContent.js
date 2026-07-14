@@ -45,21 +45,30 @@ export const homeContent = {
     principles: [
       {
         number: '01',
+        eyebrow: 'MEANING',
         title: 'Design creates meaning',
-        description:
-          'Technology creates possibilities, but design gives them direction. I focus on understanding people, contexts and interactions to transform tools into meaningful experiences.',
+        statement:
+          'Technology creates possibilities. Design decides what they mean.',
+        supporting:
+          'I focus on people, contexts and interactions to transform technical tools into experiences with clear purpose and direction.',
       },
       {
         number: '02',
+        eyebrow: 'BEYOND INTERFACES',
         title: 'Experiences go beyond interfaces',
-        description:
-          'Design is not limited to screens. It includes behaviours, systems, environments and every moment in which people interact with technology.',
+        statement:
+          'An experience is more than the screen people interact with.',
+        supporting:
+          'It includes behaviours, environments, systems and every moment that shapes how technology is understood and used.',
       },
       {
         number: '03',
+        eyebrow: 'CURIOSITY',
         title: 'Curiosity expands possibilities',
-        description:
-          'Exploring different mediums helps me discover new perspectives, tools and ways of designing. Curiosity is how I learn, experiment and continuously evolve.',
+        statement:
+          'Exploring different mediums reveals new ways to solve problems.',
+        supporting:
+          'By moving between product design, code, games and emerging technologies, I discover perspectives and tools that strengthen my design process.',
       },
     ],
   },

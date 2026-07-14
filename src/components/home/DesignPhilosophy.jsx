@@ -1,19 +1,34 @@
 import { useRef } from 'react';
 import DesignPrinciple from './DesignPrinciple.jsx';
+import SectionHeading from './SectionHeading.jsx';
 import { useDesignPhilosophyScroll } from '../../hooks/useDesignPhilosophyScroll.js';
 
-function SectionHeader({ title, description }) {
+function SectionProgress({ total }) {
   return (
-    <div className="max-w-3xl">
-      <h2
-        id="design-philosophy"
-        className="text-3xl font-semibold leading-tight text-neutral-950 sm:text-4xl lg:text-5xl"
-      >
-        {title}
-      </h2>
-      <p className="mt-5 text-base leading-7 text-neutral-600 sm:text-lg">
-        {description}
+    <div
+      aria-hidden="true"
+      className="design-philosophy-progress hidden flex-col items-end gap-4 pb-1 min-[900px]:flex"
+    >
+      <p className="text-sm font-medium tabular-nums text-neutral-500">
+        <span
+          data-design-progress-current
+          className="text-accent-600"
+        >
+          01
+        </span>{' '}
+        / {String(total).padStart(2, '0')}
       </p>
+      <div className="flex w-28 gap-1.5" data-design-progress-track>
+        {Array.from({ length: total }, (_, index) => (
+          <span
+            key={index}
+            data-design-progress-segment
+            className={`h-0.5 flex-1 rounded-full ${
+              index === 0 ? 'bg-accent-600' : 'bg-neutral-200'
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -31,17 +46,40 @@ export default function DesignPhilosophy({ content }) {
     >
       <div
         data-design-philosophy-story
-        className="space-y-14 sm:space-y-16 lg:space-y-20"
+        className="space-y-20 sm:space-y-24 lg:space-y-28"
       >
-        <SectionHeader
-          title={content.title}
-          description={content.description}
-        />
+        <div
+          data-design-philosophy-intro
+          className="min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,4fr)_minmax(0,1fr)] min-[900px]:items-end min-[900px]:gap-x-8 min-[900px]:gap-y-8"
+        >
+          <div className="min-[900px]:col-span-3">
+            <SectionHeading
+              id="design-philosophy"
+              title={content.title}
+              description={content.description}
+            />
+          </div>
+          <div className="min-[900px]:col-start-3 min-[900px]:row-start-2 min-[900px]:justify-self-end">
+            <SectionProgress total={content.principles.length} />
+          </div>
+        </div>
 
-        <div className="divide-y divide-neutral-200 border-y border-neutral-200">
-          {content.principles.map((principle) => (
-            <DesignPrinciple key={principle.number} principle={principle} />
-          ))}
+        <div
+          data-design-principles-viewport
+          className="min-[900px]:h-[min(58vh,34rem)]"
+        >
+          <div
+            data-design-principles
+            className="relative"
+          >
+            {content.principles.map((principle, index) => (
+              <DesignPrinciple
+                key={principle.number}
+                principle={principle}
+                showTopSeparator={index === 0}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

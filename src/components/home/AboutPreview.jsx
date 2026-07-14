@@ -14,7 +14,7 @@ export default function AboutPreview({ content }) {
           <Link
             to="/about"
             aria-label="Go to About page"
-            className="home-about-name mx-auto block max-w-7xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-neutral-50"
+            className="home-about-name mx-auto block max-w-7xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-focus-ring"
           >
             <span className="home-about-name__base">{content.name}</span>
             <span className="home-about-name__band" aria-hidden="true" />

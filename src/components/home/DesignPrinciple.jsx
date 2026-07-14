@@ -1,30 +1,69 @@
-export default function DesignPrinciple({ principle }) {
+export default function DesignPrinciple({ principle, showTopSeparator }) {
   return (
     <article
       data-design-principle
-      className="grid gap-8 py-10 sm:py-12 lg:grid-cols-[minmax(7rem,0.35fr)_minmax(0,1fr)] lg:gap-16 lg:py-16"
+      className="relative grid gap-8 py-10 sm:py-12 lg:grid-cols-[8.5rem_minmax(0,1fr)_8.5rem] lg:gap-12 lg:py-16 xl:grid-cols-[12rem_minmax(0,1fr)_12rem] xl:gap-16"
     >
-      <p
-        data-design-principle-number
-        className="text-5xl font-semibold leading-none tracking-tight text-neutral-300 sm:text-6xl lg:text-7xl"
-      >
-        {principle.number}
-      </p>
+      {showTopSeparator ? (
+        <span
+          aria-hidden="true"
+          data-design-principles-top-separator
+          className="absolute inset-x-0 top-0 h-px bg-neutral-200"
+        />
+      ) : null}
 
-      <div className="max-w-4xl">
+      <div className="relative min-h-16 sm:min-h-20 lg:min-h-24">
+        <p
+          data-design-principle-number
+          className="absolute top-0 left-0 text-5xl font-semibold leading-none tracking-tight text-neutral-300 sm:text-6xl lg:text-7xl"
+        >
+          {principle.number}
+        </p>
+      </div>
+
+      <div className="mx-auto w-full max-w-4xl">
+        <p
+          data-design-principle-eyebrow
+          className="mb-3 text-xs font-semibold text-neutral-500 uppercase sm:text-sm"
+        >
+          {principle.number} — {principle.eyebrow}
+        </p>
         <h3
           data-design-principle-title
           className="text-2xl font-semibold leading-tight text-neutral-950 sm:text-3xl lg:text-4xl"
         >
           {principle.title}
         </h3>
-        <p
+        <div
           data-design-principle-description
-          className="mt-5 max-w-3xl text-base leading-7 text-neutral-600 sm:text-lg sm:leading-8"
+          className="mt-7 max-w-3xl"
         >
-          {principle.description}
-        </p>
+          <p className="max-w-2xl text-xl font-medium leading-snug text-neutral-900 sm:text-2xl">
+            {principle.statement}
+          </p>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-600 sm:text-lg sm:leading-8">
+            {principle.supporting}
+          </p>
+        </div>
       </div>
+
+      <div
+        aria-hidden="true"
+        data-design-principle-graphic
+        className="hidden lg:block"
+      />
+
+      <span
+        aria-hidden="true"
+        data-design-principle-separator
+        className="absolute inset-x-0 bottom-0 h-px bg-neutral-200"
+      />
+
+      <span
+        aria-hidden="true"
+        data-design-principle-line
+        className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 rounded-full bg-accent-600"
+      />
     </article>
   );
 }
