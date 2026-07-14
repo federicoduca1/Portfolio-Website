@@ -65,9 +65,10 @@ body {
 .manifesto-keyword::after {
   position: absolute;
   right: 0;
-  bottom: 0.02em;
+  bottom: -0.1em;
   left: 0;
-  height: 1px;
+  height: 2px;
+  border-radius: 999px;
   background: currentColor;
   content: "";
   opacity: 0.72;
@@ -170,8 +171,56 @@ body {
   background: #fff;
 }
 
+.hero-scroll-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: 5.5rem;
+  height: 5.5rem;
+  color: rgb(38 38 38 / 0.72);
+  opacity: 1;
+  pointer-events: none;
+  transform: translate3d(
+      calc(var(--hero-cursor-x, -100px) - 50%),
+      calc(var(--hero-cursor-y, -100px) - 50%),
+      0
+    );
+  transition: opacity 180ms ease;
+  user-select: none;
+  will-change: transform;
+}
+
+.hero-scroll-cursor[data-hidden="true"] {
+  opacity: 0;
+}
+
+.hero-scroll-cursor__orbit {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  color: rgb(10 10 10 / 0.88);
+  fill: currentColor;
+  font-family: inherit;
+  font-size: 0.59rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  animation: hero-scroll-cursor-orbit 8s linear infinite;
+}
+
+.hero-scroll-cursor__pointer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: currentColor;
+  transform: translate(-50%, -50%);
+}
+
 .manifesto-composition {
-  transform: translateY(clamp(-2.75rem, -4svh, -1.5rem));
+  transform: translateY(calc(clamp(-2.75rem, -4svh, -1.5rem) + 0.5rem));
 }
 
 .hero-light-fields {
@@ -377,6 +426,12 @@ body {
   }
 }
 
+@keyframes hero-scroll-cursor-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .playground-carousel {
   scrollbar-color: #0a0a0a #e5e5e5;
   scrollbar-width: thin;
@@ -463,6 +518,10 @@ body {
 }
 
 @media (hover: none), (pointer: coarse) {
+  .hero-scroll-cursor {
+    display: none;
+  }
+
   .manifesto-keyword[data-active="true"] .manifesto-keyword__letter {
     transform: translateZ(0) scale(1.035);
   }
@@ -489,6 +548,7 @@ body {
   .hero-semantic-background,
   .hero-scroll-cue,
   .hero-scroll-cue__line,
+  .hero-scroll-cursor__orbit,
   .hero-semantic-icon {
     animation: none;
     transition: none;
@@ -526,5 +586,20 @@ body {
   .home-about-name:focus-visible .home-about-name__fill,
   .home-about-name:hover .home-about-name__fill {
     clip-path: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .manifesto-hero {
+    cursor: none;
+  }
+
+  .manifesto-composition,
+  .manifesto-composition * {
+    cursor: auto;
+  }
+
+  .manifesto-keyword {
+    cursor: pointer;
   }
 }

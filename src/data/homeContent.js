@@ -1,11 +1,11 @@
 export const homeContent = {
   manifesto: {
     segments: [
-      { text: 'I design meaningful ' },
+      { text: 'Shaping meaningful ' },
       { text: 'digital experiences', keywordId: 'digital-experiences' },
-      { text: ' by turning ' },
+      { text: ' by making ' },
       { text: 'technology', keywordId: 'technology' },
-      { text: ' into intuitive, engaging and human interactions.' },
+      { text: ' intuitive, engaging and human.' },
     ],
     keywords: [
       {

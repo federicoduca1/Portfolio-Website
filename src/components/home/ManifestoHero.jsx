@@ -229,8 +229,46 @@ function ManifestoContext({ activeKeyword }) {
   );
 }
 
+function HeroScrollCursor({ cursorRef }) {
+  return (
+    <div
+      ref={cursorRef}
+      aria-hidden="true"
+      className="hero-scroll-cursor"
+      data-hidden="true"
+    >
+      <svg
+        className="hero-scroll-cursor__orbit"
+        viewBox="0 0 100 100"
+      >
+        <defs>
+          <path
+            id="hero-scroll-cursor-path"
+            d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
+          />
+        </defs>
+        <text>
+          <textPath href="#hero-scroll-cursor-path" startOffset="2%">
+            SCROLL
+          </textPath>
+          <textPath href="#hero-scroll-cursor-path" startOffset="52%">
+            SCROLL
+          </textPath>
+        </text>
+      </svg>
+      <svg
+        className="hero-scroll-cursor__pointer"
+        viewBox="0 0 24 24"
+      >
+        <path d="M5 3.7v15.1l4.1-3.8 2.8 6 2.6-1.2-2.8-5.9 5.5-.5L5 3.7Z" />
+      </svg>
+    </div>
+  );
+}
+
 export default function ManifestoHero({ manifesto }) {
   const [activeKeywordId, setActiveKeywordId] = useState(null);
+  const cursorRef = useRef(null);
   const heroRef = useRef(null);
   const pointerFieldRef = useRef(null);
   const scrollCueRef = useRef(null);
@@ -248,6 +286,7 @@ export default function ManifestoHero({ manifesto }) {
 
   useLayoutEffect(() => {
     const hero = heroRef.current;
+    const cursor = cursorRef.current;
     const pointerField = pointerFieldRef.current;
     const supportsPointerReaction = window.matchMedia(
       '(hover: hover) and (pointer: fine)',
@@ -259,6 +298,7 @@ export default function ManifestoHero({ manifesto }) {
     if (
       !hero ||
       !pointerField ||
+      !cursor ||
       !supportsPointerReaction ||
       prefersReducedMotion
     ) {
@@ -311,15 +351,23 @@ export default function ManifestoHero({ manifesto }) {
 
     function handlePointerMove(event) {
       const bounds = hero.getBoundingClientRect();
+      const pointerX = event.clientX - bounds.left;
+      const pointerY = event.clientY - bounds.top;
       isPointerInside = true;
-      targetPosition.x = event.clientX - bounds.left;
-      targetPosition.y = event.clientY - bounds.top;
+      targetPosition.x = pointerX;
+      targetPosition.y = pointerY;
+      hero.style.setProperty('--hero-cursor-x', `${pointerX}px`);
+      hero.style.setProperty('--hero-cursor-y', `${pointerY}px`);
+      cursor.dataset.hidden = String(
+        Boolean(event.target.closest('.manifesto-composition')),
+      );
       scheduleFieldUpdate();
     }
 
     function handlePointerLeave() {
       const nextCenter = centerField();
       isPointerInside = false;
+      cursor.dataset.hidden = 'true';
       targetPosition.x = nextCenter.x;
       targetPosition.y = nextCenter.y;
       scheduleFieldUpdate();
@@ -341,9 +389,103 @@ export default function ManifestoHero({ manifesto }) {
       window.removeEventListener('resize', handleResize);
       hero.style.removeProperty('--pointer-x');
       hero.style.removeProperty('--pointer-y');
+      hero.style.removeProperty('--hero-cursor-x');
+      hero.style.removeProperty('--hero-cursor-y');
 
       if (animationFrame !== null) {
         window.cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    let accumulatedScroll = 0;
+    let guidedScrollStartedAt = 0;
+    let isGuidedScrollActive = false;
+    let scrollFrame = null;
+
+    if (!hero) {
+      return undefined;
+    }
+
+    function finishGuidedScroll(targetTop) {
+      if (
+        Math.abs(window.scrollY - targetTop) < 2 ||
+        window.performance.now() - guidedScrollStartedAt > 1400 ||
+        !isGuidedScrollActive
+      ) {
+        isGuidedScrollActive = false;
+        scrollFrame = null;
+        return;
+      }
+
+      scrollFrame = window.requestAnimationFrame(() =>
+        finishGuidedScroll(targetTop),
+      );
+    }
+
+    function handleGuidedScroll(event) {
+      if (event.deltaY <= 0) {
+        return;
+      }
+
+      if (isGuidedScrollActive) {
+        event.preventDefault();
+        return;
+      }
+
+      const nextSection = hero.nextElementSibling;
+
+      if (!nextSection) {
+        return;
+      }
+
+      event.preventDefault();
+      accumulatedScroll += event.deltaY;
+
+      if (accumulatedScroll < 28) {
+        return;
+      }
+
+      const navbarHeight =
+        document.querySelector('header')?.getBoundingClientRect().height ?? 0;
+      const targetTop =
+        window.scrollY + nextSection.getBoundingClientRect().top - navbarHeight;
+
+      accumulatedScroll = 0;
+      guidedScrollStartedAt = window.performance.now();
+      isGuidedScrollActive = true;
+      window.scrollTo({
+        top: targetTop,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      });
+
+      if (prefersReducedMotion) {
+        isGuidedScrollActive = false;
+      } else {
+        scrollFrame = window.requestAnimationFrame(() =>
+          finishGuidedScroll(targetTop),
+        );
+      }
+    }
+
+    function resetScrollIntent() {
+      accumulatedScroll = 0;
+    }
+
+    hero.addEventListener('wheel', handleGuidedScroll, { passive: false });
+    hero.addEventListener('pointerleave', resetScrollIntent);
+
+    return () => {
+      hero.removeEventListener('wheel', handleGuidedScroll);
+      hero.removeEventListener('pointerleave', resetScrollIntent);
+
+      if (scrollFrame !== null) {
+        window.cancelAnimationFrame(scrollFrame);
       }
     };
   }, []);
@@ -411,16 +553,16 @@ export default function ManifestoHero({ manifesto }) {
       <HeroBackground activeConcept={activeKeywordId} />
       <div aria-hidden="true" className="hero-readability-mask" />
 
-      <div className="manifesto-composition relative z-10 mx-auto w-full max-w-7xl px-4 text-left sm:px-5 sm:text-center lg:px-6">
+      <div className="manifesto-composition relative z-10 mx-auto w-full max-w-7xl px-4 text-center sm:px-5 lg:px-6">
         <h1
           id="home-manifesto"
-          className="manifesto-statement text-[clamp(1rem,5.35vw,1.875rem)] font-semibold leading-[1.12] tracking-[0.005em] text-neutral-950 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+          className="manifesto-statement text-[clamp(0.875rem,4.6vw,1.875rem)] font-semibold leading-[1.12] tracking-[0.005em] text-neutral-950 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
           data-has-active-keyword={Boolean(activeKeywordId)}
         >
           {manifestoLines.map((line, lineIndex) => (
             <span
               key={line.map((segment) => segment.text).join('')}
-              className="block sm:whitespace-nowrap"
+              className="block whitespace-nowrap"
             >
               {line.map((segment) => (
                 <ManifestoSegment
@@ -449,6 +591,8 @@ export default function ManifestoHero({ manifesto }) {
         <span>Scroll to explore</span>
         <span className="hero-scroll-cue__line" />
       </div>
+
+      <HeroScrollCursor cursorRef={cursorRef} />
     </section>
   );
 }
