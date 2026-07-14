@@ -14,6 +14,13 @@ export const homeContent = {
         title: 'Beyond interfaces',
         description:
           'I explore products, interactive systems, games and emerging mediums to understand how people experience technology in different contexts.',
+        tools: [
+          { id: 'figma', label: 'Figma' },
+          { id: 'unity', label: 'Unity' },
+          { id: 'blender', label: 'Blender' },
+          { id: 'visual-studio-code', label: 'Visual Studio Code' },
+          { id: 'illustrator', label: 'Adobe Illustrator' },
+        ],
       },
       {
         id: 'technology',
@@ -21,6 +28,13 @@ export const homeContent = {
         title: 'A medium for exploration',
         description:
           'I use code and prototyping to test ideas, understand technical constraints and turn design decisions into working experiences.',
+        tools: [
+          { id: 'html', label: 'HTML' },
+          { id: 'css', label: 'CSS' },
+          { id: 'javascript', label: 'JavaScript' },
+          { id: 'react', label: 'React.js' },
+          { id: 'c-sharp', label: 'C#' },
+        ],
       },
     ],
   },
