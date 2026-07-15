@@ -1,4 +1,13 @@
-export default function SectionIntro({ id, title, description, size = 'default' }) {
+import HighlightedTitle from '../HighlightedTitle.jsx';
+
+export default function SectionIntro({
+  id,
+  title,
+  description,
+  descriptionClassName = 'max-w-2xl text-base leading-7 sm:text-lg',
+  revealSequence = false,
+  size = 'default',
+}) {
   const titleSize =
     size === 'large'
       ? 'text-4xl sm:text-5xl lg:text-6xl'
@@ -6,13 +15,17 @@ export default function SectionIntro({ id, title, description, size = 'default' 
 
   return (
     <div className="max-w-3xl">
-      <h2
+      <HighlightedTitle
         id={id}
         className={`${titleSize} font-semibold leading-tight text-neutral-950`}
+        data-playground-reveal={revealSequence ? 'title' : undefined}
       >
         {title}
-      </h2>
-      <p className="mt-5 max-w-2xl text-base leading-7 text-neutral-600 sm:text-lg">
+      </HighlightedTitle>
+      <p
+        className={`mt-5 text-neutral-600 ${descriptionClassName}`}
+        data-playground-reveal={revealSequence ? 'copy' : undefined}
+      >
         {description}
       </p>
     </div>

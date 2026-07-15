@@ -75,6 +75,14 @@ export function useDesignPhilosophyScroll(sectionRef) {
           const separators = principles.map((principle) =>
             principle.querySelector('[data-design-principle-separator]'),
           );
+          const graphics = principles.map((principle) =>
+            principle.querySelector('[data-design-principle-graphic]'),
+          );
+          const graphicMotionElements = graphics.flatMap((graphic) =>
+            gsap.utils.toArray(
+              graphic.querySelectorAll('[data-graphic-motion]'),
+            ),
+          );
           const topSeparator = section.querySelector(
             '[data-design-principles-top-separator]',
           );
@@ -99,12 +107,22 @@ export function useDesignPhilosophyScroll(sectionRef) {
                 ...eyebrows,
                 ...lines,
                 ...separators,
+                ...graphics,
+                ...graphicMotionElements,
                 ...progressSegments,
                 principlesTrack,
                 topSeparator,
               ],
               { clearProps: 'all' },
             );
+
+            if (conditions.desktop && conditions.reduceMotion) {
+              gsap.set(graphics, {
+                opacity: (index) => (index === 0 ? 1 : 0),
+                rotation: 0,
+                y: 0,
+              });
+            }
 
             return undefined;
           }
@@ -191,6 +209,12 @@ export function useDesignPhilosophyScroll(sectionRef) {
             transitionTimeline.to(lines, {
               scaleX: 0,
               duration: 0.3,
+            }, 0);
+            transitionTimeline.to(graphics, {
+              opacity: 0,
+              rotation: 0,
+              y: 10,
+              duration: 0.28,
             }, 0);
             if (final) {
               transitionTimeline.set(
@@ -314,7 +338,9 @@ export function useDesignPhilosophyScroll(sectionRef) {
             }
 
             transitionTimeline?.kill();
+            const previousIndex = activeIndex;
             activeIndex = nextIndex;
+            const movementDirection = previousIndex > nextIndex ? -1 : 1;
 
             const inactiveIndexes = principles
               .map((_, index) => index)
@@ -350,6 +376,9 @@ export function useDesignPhilosophyScroll(sectionRef) {
               (index) => eyebrows[index],
             );
             const inactiveLines = inactiveIndexes.map((index) => lines[index]);
+            const inactiveGraphics = inactiveIndexes.map(
+              (index) => graphics[index],
+            );
 
             transitionTimeline = gsap.timeline({
               defaults: { ease: 'power2.out', overwrite: true },
@@ -405,6 +434,12 @@ export function useDesignPhilosophyScroll(sectionRef) {
               scaleX: 0,
               duration: 0.26,
             }, 0);
+            transitionTimeline.to(inactiveGraphics, {
+              opacity: 0,
+              rotation: -3 * movementDirection,
+              y: -12 * movementDirection,
+              duration: 0.3,
+            }, 0);
 
             transitionTimeline.to(principles[nextIndex], {
               opacity: 1,
@@ -449,6 +484,124 @@ export function useDesignPhilosophyScroll(sectionRef) {
               scaleX: 1,
               duration: 0.4,
             }, 0.34);
+            transitionTimeline.fromTo(
+              graphics[nextIndex],
+              {
+                opacity: 0,
+                rotation: 2 * movementDirection,
+                y: 14 * movementDirection,
+              },
+              {
+                opacity: 1,
+                rotation: 0,
+                y: 0,
+                duration: 0.7,
+              },
+              0.2,
+            );
+
+            const activeGraphic = graphics[nextIndex];
+            const graphicType = activeGraphic.dataset.designPrincipleGraphic;
+            const selectedPaths = gsap.utils.toArray(
+              activeGraphic.querySelectorAll('[data-graphic-selected-path]'),
+            );
+
+            if (graphicType === 'meaning') {
+              const alignmentOffsets = [
+                { x: -12, y: -9 },
+                { x: -18, y: 7 },
+                { x: -10, y: 12 },
+              ];
+              const aligningShapes = gsap.utils.toArray(
+                activeGraphic.querySelectorAll('[data-graphic-align]'),
+              );
+              const endpoint = activeGraphic.querySelector(
+                '[data-graphic-endpoint]',
+              );
+
+              transitionTimeline.fromTo(
+                aligningShapes,
+                {
+                  x: (index) => alignmentOffsets[index].x,
+                  y: (index) => alignmentOffsets[index].y,
+                },
+                {
+                  x: 0,
+                  y: 0,
+                  duration: 0.48,
+                  stagger: 0.045,
+                },
+                0.22,
+              );
+              transitionTimeline.fromTo(
+                selectedPaths,
+                { opacity: 0.24, strokeDasharray: 1, strokeDashoffset: 1 },
+                { opacity: 1, strokeDashoffset: 0, duration: 0.48 },
+                0.3,
+              );
+              transitionTimeline.fromTo(
+                endpoint,
+                { opacity: 0, scale: 0.72, transformOrigin: '50% 50%' },
+                { opacity: 1, scale: 1, duration: 0.34 },
+                0.52,
+              );
+            }
+
+            if (graphicType === 'beyond-interfaces') {
+              const traveler = activeGraphic.querySelector(
+                '[data-graphic-traveler]',
+              );
+
+              transitionTimeline.fromTo(
+                selectedPaths,
+                { opacity: 0.2, strokeDasharray: 1, strokeDashoffset: 1 },
+                { opacity: 1, strokeDashoffset: 0, duration: 0.42 },
+                0.34,
+              );
+              transitionTimeline.fromTo(
+                traveler,
+                { fill: '#737373', opacity: 0.36, x: -118 },
+                {
+                  fill: accentColor,
+                  opacity: 1,
+                  x: 0,
+                  duration: 0.58,
+                },
+                0.24,
+              );
+            }
+
+            if (graphicType === 'curiosity') {
+              const branches = gsap.utils.toArray(
+                activeGraphic.querySelectorAll('[data-graphic-branch]'),
+              );
+              const outcomes = gsap.utils.toArray(
+                activeGraphic.querySelectorAll('[data-graphic-outcome]'),
+              );
+
+              transitionTimeline.fromTo(
+                branches,
+                { opacity: 0, strokeDasharray: 1, strokeDashoffset: 1 },
+                {
+                  opacity: (index) => [0.52, 1, 0.52, 0.82][index],
+                  strokeDashoffset: 0,
+                  duration: 0.46,
+                  stagger: 0.055,
+                },
+                0.24,
+              );
+              transitionTimeline.fromTo(
+                outcomes,
+                { opacity: 0, scale: 0.72, transformOrigin: '50% 50%' },
+                {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.32,
+                  stagger: 0.07,
+                },
+                0.5,
+              );
+            }
 
             if (progressCurrent) {
               transitionTimeline.to(progressCurrent, {
@@ -498,6 +651,7 @@ export function useDesignPhilosophyScroll(sectionRef) {
             opacity: 0.68,
           });
           gsap.set(lines, { scaleX: 0 });
+          gsap.set(graphics, { opacity: 0, rotation: 0, y: 10 });
           gsap.set([topSeparator, ...separators], { opacity: 1 });
           gsap.set(principlesTrack, { y: 0 });
           gsap.set(progressSegments, {

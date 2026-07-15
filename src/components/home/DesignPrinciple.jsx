@@ -1,3 +1,5 @@
+import DesignPrincipleGraphic from './DesignPrincipleGraphic.jsx';
+
 export default function DesignPrinciple({ principle, showTopSeparator }) {
   return (
     <article
@@ -49,9 +51,14 @@ export default function DesignPrinciple({ principle, showTopSeparator }) {
 
       <div
         aria-hidden="true"
-        data-design-principle-graphic
-        className="hidden lg:block"
-      />
+        data-design-principle-graphic={principle.graphic}
+        className="relative hidden self-stretch text-neutral-900 opacity-0 lg:block"
+      >
+        <DesignPrincipleGraphic
+          type={principle.graphic}
+          className="pointer-events-none absolute top-1/2 left-1/2 w-[clamp(10rem,18vw,19rem)] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-[0.11]"
+        />
+      </div>
 
       <span
         aria-hidden="true"

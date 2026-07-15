@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from 'react-router';
+import ControlCenter from '../components/ControlCenter.jsx';
 import Footer from '../components/Footer.jsx';
 import Navbar from '../components/Navbar.jsx';
 
@@ -18,7 +19,7 @@ export default function MainLayout() {
       >
         <Outlet />
       </main>
-      <div aria-hidden="true" data-control-center-placeholder />
+      <ControlCenter />
       <Footer variant={isHomePage ? 'dark' : 'light'} />
     </div>
   );
