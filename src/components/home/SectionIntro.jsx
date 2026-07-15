@@ -7,11 +7,13 @@ export default function SectionIntro({
   descriptionClassName = 'max-w-2xl text-base leading-7 sm:text-lg',
   revealSequence = false,
   size = 'default',
+  titleClassName,
 }) {
-  const titleSize =
+  const titleSize = titleClassName ?? (
     size === 'large'
       ? 'text-4xl sm:text-5xl lg:text-6xl'
-      : 'text-3xl sm:text-4xl lg:text-5xl';
+      : 'text-3xl sm:text-4xl lg:text-5xl'
+  );
 
   return (
     <div className="max-w-3xl">

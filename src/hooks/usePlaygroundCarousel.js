@@ -1,18 +1,25 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const DRAG_THRESHOLD = 6;
-const AUTO_SCROLL_SPEED = 7;
-const IDLE_DELAY = 1400;
+const CLICK_THRESHOLD = 7;
+const SNAP_THRESHOLD = 36;
 
-export default function usePlaygroundCarousel() {
+export default function usePlaygroundCarousel(itemCount) {
   const carouselRef = useRef(null);
   const cursorRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    if (activeIndex >= itemCount) {
+      setActiveIndex(0);
+    }
+  }, [activeIndex, itemCount]);
 
   useEffect(() => {
     const carousel = carouselRef.current;
     const cursor = cursorRef.current;
 
-    if (!carousel) {
+    if (!carousel || itemCount === 0) {
       return undefined;
     }
 
@@ -23,22 +30,15 @@ export default function usePlaygroundCarousel() {
       '(hover: hover) and (pointer: fine)',
     ).matches;
 
-    let autoFrame;
     let cursorFrame;
-    let inertiaFrame;
     let clickResetTimer;
-    let previousAutoTime = performance.now();
-    let idleUntil = 0;
-    let isHovered = false;
-    let isFocused = false;
-    let isDragging = false;
-    let isTouching = false;
+    let pointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let latestX = 0;
+    let isPointerDown = false;
     let didDrag = false;
     let suppressClick = false;
-    let pointerId = null;
-    let previousPointerX = 0;
-    let previousPointerTime = 0;
-    let scrollVelocity = 0;
     let cursorTargetX = -120;
     let cursorTargetY = -120;
     let cursorX = -120;
@@ -46,44 +46,10 @@ export default function usePlaygroundCarousel() {
 
     carousel.dataset.customCursor = finePointer && !reducedMotion ? 'true' : 'false';
 
-    function loopWidth() {
-      return carousel.querySelector('[data-carousel-sequence]')?.offsetWidth ?? 0;
-    }
-
-    function normalizeScrollPosition() {
-      const width = loopWidth();
-
-      if (width > 0 && carousel.scrollLeft >= width) {
-        carousel.scrollLeft -= width;
-      }
-    }
-
-    function pauseTemporarily() {
-      idleUntil = performance.now() + IDLE_DELAY;
-    }
-
-    function isAutoScrollPaused(now) {
-      return (
-        reducedMotion ||
-        isHovered ||
-        isFocused ||
-        isDragging ||
-        isTouching ||
-        inertiaFrame !== undefined ||
-        now < idleUntil
-      );
-    }
-
-    function runAutoScroll(now) {
-      const delta = Math.min(now - previousAutoTime, 40);
-      previousAutoTime = now;
-
-      if (!isAutoScrollPaused(now)) {
-        carousel.scrollLeft += (AUTO_SCROLL_SPEED * delta) / 1000;
-        normalizeScrollPosition();
-      }
-
-      autoFrame = requestAnimationFrame(runAutoScroll);
+    function stepCarousel(direction) {
+      setActiveIndex((currentIndex) => (
+        currentIndex + direction + itemCount
+      ) % itemCount);
     }
 
     function runCursor() {
@@ -97,46 +63,11 @@ export default function usePlaygroundCarousel() {
       cursorFrame = requestAnimationFrame(runCursor);
     }
 
-    function stopInertia() {
-      if (inertiaFrame !== undefined) {
-        cancelAnimationFrame(inertiaFrame);
-        inertiaFrame = undefined;
-      }
-    }
-
-    function startInertia() {
-      if (reducedMotion || Math.abs(scrollVelocity) < 0.04) {
-        pauseTemporarily();
-        return;
-      }
-
-      let previousTime = performance.now();
-
-      function glide(now) {
-        const delta = Math.min(now - previousTime, 32);
-        previousTime = now;
-        carousel.scrollLeft += scrollVelocity * delta;
-        normalizeScrollPosition();
-        scrollVelocity *= Math.pow(0.92, delta / 16.67);
-
-        if (Math.abs(scrollVelocity) < 0.02) {
-          inertiaFrame = undefined;
-          pauseTemporarily();
-          return;
-        }
-
-        inertiaFrame = requestAnimationFrame(glide);
-      }
-
-      inertiaFrame = requestAnimationFrame(glide);
-    }
-
     function handlePointerEnter(event) {
       if (!finePointer || event.pointerType === 'touch') {
         return;
       }
 
-      isHovered = true;
       cursorTargetX = event.clientX;
       cursorTargetY = event.clientY;
 
@@ -146,11 +77,28 @@ export default function usePlaygroundCarousel() {
     }
 
     function handlePointerLeave() {
-      isHovered = false;
-      pauseTemporarily();
-
-      if (cursor && !isDragging) {
+      if (cursor && !isPointerDown) {
         cursor.dataset.hidden = 'true';
+      }
+    }
+
+    function handlePointerDown(event) {
+      if (event.pointerType === 'mouse' && event.button !== 0) {
+        return;
+      }
+
+      isPointerDown = true;
+      didDrag = false;
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startY = event.clientY;
+      latestX = event.clientX;
+      carousel.dataset.dragging = 'true';
+      carousel.setPointerCapture(event.pointerId);
+      setIsDragging(true);
+
+      if (cursor && finePointer) {
+        cursor.dataset.dragging = 'true';
       }
     }
 
@@ -160,64 +108,25 @@ export default function usePlaygroundCarousel() {
         cursorTargetY = event.clientY;
       }
 
-      if (!isDragging || event.pointerId !== pointerId) {
+      if (!isPointerDown || event.pointerId !== pointerId) {
         return;
       }
 
-      event.preventDefault();
-      const now = performance.now();
-      const movement = event.clientX - previousPointerX;
-      const elapsed = Math.max(now - previousPointerTime, 1);
+      latestX = event.clientX;
+      const horizontalDistance = event.clientX - startX;
+      const verticalDistance = event.clientY - startY;
 
-      if (Math.abs(movement) > 0) {
-        carousel.scrollLeft -= movement;
-        normalizeScrollPosition();
-        scrollVelocity = -movement / elapsed;
-      }
-
-      if (Math.abs(event.clientX - Number(carousel.dataset.dragStartX)) > DRAG_THRESHOLD) {
+      if (Math.abs(horizontalDistance) > CLICK_THRESHOLD) {
         didDrag = true;
       }
 
-      previousPointerX = event.clientX;
-      previousPointerTime = now;
-    }
-
-    function handlePointerDown(event) {
-      if (event.pointerType === 'touch') {
-        isTouching = true;
-        return;
-      }
-
-      if (!finePointer || event.button !== 0) {
-        pauseTemporarily();
-        return;
-      }
-
-      stopInertia();
-      isDragging = true;
-      didDrag = false;
-      pointerId = event.pointerId;
-      previousPointerX = event.clientX;
-      previousPointerTime = performance.now();
-      scrollVelocity = 0;
-      carousel.dataset.dragStartX = String(event.clientX);
-      carousel.dataset.dragging = 'true';
-      carousel.setPointerCapture(event.pointerId);
-
-      if (cursor) {
-        cursor.dataset.dragging = 'true';
+      if (Math.abs(horizontalDistance) > Math.abs(verticalDistance)) {
+        event.preventDefault();
       }
     }
 
     function finishDrag(event) {
-      if (event.pointerType === 'touch') {
-        isTouching = false;
-        pauseTemporarily();
-        return;
-      }
-
-      if (!isDragging || event.pointerId !== pointerId) {
+      if (!isPointerDown || event.pointerId !== pointerId) {
         return;
       }
 
@@ -225,14 +134,19 @@ export default function usePlaygroundCarousel() {
         carousel.releasePointerCapture(event.pointerId);
       }
 
-      isDragging = false;
+      const dragDistance = latestX - startX;
+      isPointerDown = false;
       pointerId = null;
       carousel.dataset.dragging = 'false';
-      delete carousel.dataset.dragStartX;
+      setIsDragging(false);
 
       if (cursor) {
         cursor.dataset.dragging = 'false';
-        cursor.dataset.hidden = isHovered ? 'false' : 'true';
+        cursor.dataset.hidden = carousel.matches(':hover') ? 'false' : 'true';
+      }
+
+      if (Math.abs(dragDistance) >= SNAP_THRESHOLD) {
+        stepCarousel(dragDistance < 0 ? 1 : -1);
       }
 
       if (didDrag) {
@@ -241,9 +155,6 @@ export default function usePlaygroundCarousel() {
         clickResetTimer = window.setTimeout(() => {
           suppressClick = false;
         }, 0);
-        startInertia();
-      } else {
-        pauseTemporarily();
       }
     }
 
@@ -257,24 +168,15 @@ export default function usePlaygroundCarousel() {
       suppressClick = false;
     }
 
-    function handleFocusIn() {
-      isFocused = true;
-    }
-
-    function handleFocusOut(event) {
-      if (carousel.contains(event.relatedTarget)) {
-        return;
+    function handleKeyDown(event) {
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        stepCarousel(1);
+      } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        stepCarousel(-1);
       }
-
-      isFocused = false;
-      pauseTemporarily();
     }
-
-    function handleWheel() {
-      pauseTemporarily();
-    }
-
-    autoFrame = requestAnimationFrame(runAutoScroll);
 
     if (finePointer && !reducedMotion) {
       cursorFrame = requestAnimationFrame(runCursor);
@@ -282,32 +184,32 @@ export default function usePlaygroundCarousel() {
 
     carousel.addEventListener('pointerenter', handlePointerEnter);
     carousel.addEventListener('pointerleave', handlePointerLeave);
-    carousel.addEventListener('pointermove', handlePointerMove);
     carousel.addEventListener('pointerdown', handlePointerDown);
+    carousel.addEventListener('pointermove', handlePointerMove);
     carousel.addEventListener('pointerup', finishDrag);
     carousel.addEventListener('pointercancel', finishDrag);
     carousel.addEventListener('click', handleClick, true);
-    carousel.addEventListener('focusin', handleFocusIn);
-    carousel.addEventListener('focusout', handleFocusOut);
-    carousel.addEventListener('wheel', handleWheel, { passive: true });
+    carousel.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      cancelAnimationFrame(autoFrame);
       cancelAnimationFrame(cursorFrame);
-      stopInertia();
       window.clearTimeout(clickResetTimer);
       carousel.removeEventListener('pointerenter', handlePointerEnter);
       carousel.removeEventListener('pointerleave', handlePointerLeave);
-      carousel.removeEventListener('pointermove', handlePointerMove);
       carousel.removeEventListener('pointerdown', handlePointerDown);
+      carousel.removeEventListener('pointermove', handlePointerMove);
       carousel.removeEventListener('pointerup', finishDrag);
       carousel.removeEventListener('pointercancel', finishDrag);
       carousel.removeEventListener('click', handleClick, true);
-      carousel.removeEventListener('focusin', handleFocusIn);
-      carousel.removeEventListener('focusout', handleFocusOut);
-      carousel.removeEventListener('wheel', handleWheel);
+      carousel.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [itemCount]);
 
-  return { carouselRef, cursorRef };
+  return {
+    activeIndex,
+    carouselRef,
+    cursorRef,
+    goTo: setActiveIndex,
+    isDragging,
+  };
 }

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router';
+import faceFront from '../assets/branding/3d-model-face-front.png';
 import { siteConfig } from '../data/siteConfig.js';
 
 const HIDE_SCROLL_THRESHOLD = 64;
@@ -7,11 +8,12 @@ const TOP_VISIBLE_THRESHOLD = 16;
 
 function PersonalSignature() {
   return (
-    <div
-      aria-label={`${siteConfig.author} signature placeholder`}
-      className="flex size-10 shrink-0 items-center justify-center rounded-full border border-neutral-300 bg-white text-sm font-medium text-neutral-950"
-    >
-      {siteConfig.initials}
+    <div className="flex size-16 shrink-0 items-center justify-center sm:size-20">
+      <img
+        src={faceFront}
+        alt={`${siteConfig.author} portrait`}
+        className="size-full object-contain"
+      />
     </div>
   );
 }

@@ -118,20 +118,33 @@ export const homeContent = {
   },
   closing: {
     contact: {
-      title: "Let's build something meaningful together.",
+      statement: 'Looking for the next meaningful opportunity.',
       description:
-        'Open to thoughtful collaborations, design conversations and digital experiences with a clear purpose.',
-      methods: [
-        { label: 'Email', value: 'hello@example.com', primary: true },
-        { label: 'LinkedIn', value: 'Professional profile' },
-        { label: 'Behance', value: 'Selected visual work' },
-      ],
-      cta: 'Contact',
+        'Currently seeking a Product Design role, while staying open to collaborations, side projects and conversations around design, technology and emerging experiences.',
+      cta: { label: 'Contact', path: '/contact' },
+      quickContacts: {
+        title: 'Quick contacts',
+        items: [
+          {
+            id: 'email',
+            icon: 'email',
+            label: 'federicoduca1@gmail.com',
+            href: 'mailto:federicoduca1@gmail.com',
+          },
+          {
+            id: 'linkedin',
+            icon: 'linkedin',
+            label: 'Federico Duca',
+            href: 'https://www.linkedin.com/in/federicoduca/',
+            external: true,
+          },
+        ],
+      },
     },
     about: {
-      intro: 'Now let me introduce myself.',
-      name: 'FedericoDuca',
-      cta: 'About',
+      eyebrow: 'Before you leave...',
+      statement: "Here's the person behind all this.",
+      cta: { label: 'Meet Federico', path: '/about' },
     },
   },
 };
