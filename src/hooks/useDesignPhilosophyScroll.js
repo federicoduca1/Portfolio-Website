@@ -32,7 +32,7 @@ export function useDesignPhilosophyScroll(sectionRef) {
 
       matchMedia.add(
         {
-          desktop: '(min-width: 900px)',
+          desktop: '(min-width: 1024px)',
           reduceMotion: '(prefers-reduced-motion: reduce)',
         },
         ({ conditions }) => {
@@ -477,7 +477,7 @@ export function useDesignPhilosophyScroll(sectionRef) {
               duration: 0.48,
             }, 0.28);
             transitionTimeline.to(principlesTrack, {
-              y: () => getCenteredTrackOffset(principles[nextIndex], 0.44),
+              y: () => getCenteredTrackOffset(principles[nextIndex], 0.46),
               duration: 0.52,
             }, 0.26);
             transitionTimeline.to(lines[nextIndex], {
@@ -664,7 +664,7 @@ export function useDesignPhilosophyScroll(sectionRef) {
             trigger: section,
             pin: story,
             start: 'top 6%',
-            end: '+=165%',
+            end: '+=175%',
             scrub: 0.35,
             invalidateOnRefresh: true,
             onEnter: () => {

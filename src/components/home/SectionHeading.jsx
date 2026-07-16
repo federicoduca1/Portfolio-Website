@@ -5,13 +5,20 @@ import HighlightedTitle from '../HighlightedTitle.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function SectionHeading({ description, id, title }) {
+export default function SectionHeading({
+  description,
+  id,
+  title,
+  variant = 'centered',
+}) {
   const headingRef = useRef(null);
+  const isNarrative = variant === 'narrative';
+  const isFeatured = variant === 'featured';
 
   useLayoutEffect(() => {
     const heading = headingRef.current;
 
-    if (!heading) {
+    if (!heading || isFeatured) {
       return undefined;
     }
 
@@ -55,23 +62,42 @@ export default function SectionHeading({ description, id, title }) {
       media.revert();
       context.revert();
     };
-  }, []);
+  }, [isFeatured]);
 
   return (
     <header
       ref={headingRef}
-      className="mx-auto w-full max-w-7xl text-center"
+      className={
+        isNarrative
+          ? 'w-full text-center lg:text-left'
+          : `mx-auto w-full text-center ${
+              isFeatured ? 'section-heading--featured' : 'max-w-7xl'
+            }`
+      }
     >
       <HighlightedTitle
         id={id}
         data-section-title
-        className="text-[clamp(3rem,8vw,7rem)] font-semibold leading-[0.96] text-neutral-950"
+        characterReveal={isFeatured}
+        controlledHighlight={isFeatured}
+        multiline={isNarrative}
+        className={
+          isNarrative
+            ? 'text-[clamp(3.5rem,5.5vw,6.25rem)] font-semibold leading-[0.94] text-neutral-950'
+            : isFeatured
+              ? 'text-[clamp(3.5rem,10vw,11rem)] font-semibold leading-[0.88] tracking-[0] text-neutral-950 min-[900px]:whitespace-nowrap'
+              : 'text-[clamp(3rem,8vw,7rem)] font-semibold leading-[0.96] text-neutral-950'
+        }
       >
         {title}
       </HighlightedTitle>
       <p
         data-section-description
-        className="mx-auto mt-7 max-w-5xl text-lg leading-8 text-neutral-600 min-[900px]:whitespace-nowrap sm:text-xl"
+        className={
+          isNarrative
+            ? 'mx-auto mt-7 max-w-md text-lg leading-8 text-neutral-600 sm:text-xl lg:mx-0'
+            : 'mx-auto mt-7 max-w-5xl text-lg leading-8 text-neutral-600 min-[900px]:whitespace-nowrap sm:text-xl'
+        }
       >
         {description}
       </p>

@@ -43,7 +43,7 @@ export const homeContent = {
   designPhilosophy: {
     title: 'Design Philosophy',
     description:
-      'Three principles guide how I approach people, technology and interaction.',
+      'Working across product design, code, games and emerging technologies helps me approach each problem with a wider set of perspectives, tools and possibilities.',
     principles: [
       {
         number: '01',

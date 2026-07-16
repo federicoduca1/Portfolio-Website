@@ -25,7 +25,7 @@ function NavigationLink({ item, onClick }) {
       onClick={onClick}
       className={({ isActive }) =>
         [
-          'rounded-sm px-3 py-2 text-base font-medium transition-colors duration-200 md:text-lg',
+          'rounded-sm px-3 py-2 text-lg font-medium transition-colors duration-200 md:text-xl',
           'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
           isActive ? 'text-neutral-950' : 'text-neutral-500 hover:text-neutral-950',
         ].join(' ')

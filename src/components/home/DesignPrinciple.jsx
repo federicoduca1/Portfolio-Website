@@ -4,7 +4,7 @@ export default function DesignPrinciple({ principle, showTopSeparator }) {
   return (
     <article
       data-design-principle
-      className="relative grid gap-8 py-10 sm:py-12 lg:grid-cols-[8.5rem_minmax(0,1fr)_8.5rem] lg:gap-12 lg:py-16 xl:grid-cols-[12rem_minmax(0,1fr)_12rem] xl:gap-16"
+      className="relative grid gap-8 py-10 sm:py-12 lg:grid-cols-[7rem_minmax(0,1fr)_8rem] lg:gap-8 lg:py-16 xl:grid-cols-[8.5rem_minmax(0,1fr)_9.5rem] xl:gap-10"
     >
       {showTopSeparator ? (
         <span

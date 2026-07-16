@@ -7,7 +7,7 @@ function SectionProgress({ total }) {
   return (
     <div
       aria-hidden="true"
-      className="design-philosophy-progress hidden flex-col items-end gap-4 pb-1 min-[900px]:flex"
+      className="design-philosophy-progress hidden flex-col items-start gap-4 pb-1 lg:flex"
     >
       <p className="text-sm font-medium tabular-nums text-neutral-500">
         <span
@@ -42,31 +42,30 @@ export default function DesignPhilosophy({ content }) {
     <section
       ref={sectionRef}
       aria-labelledby="design-philosophy"
-      className="pb-20 sm:pb-24 lg:pb-32"
+      className="design-philosophy-section pb-20 sm:pb-24 lg:pb-32"
     >
       <div
         data-design-philosophy-story
-        className="space-y-20 sm:space-y-24 lg:space-y-28"
+        className="space-y-20 sm:space-y-24 lg:grid lg:min-h-[88svh] lg:grid-cols-[minmax(17rem,0.34fr)_minmax(0,0.66fr)] lg:items-center lg:gap-[clamp(3rem,6vw,6rem)] lg:space-y-0"
       >
         <div
           data-design-philosophy-intro
-          className="min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,4fr)_minmax(0,1fr)] min-[900px]:items-end min-[900px]:gap-x-8 min-[900px]:gap-y-8"
+          className="lg:self-center"
         >
-          <div className="min-[900px]:col-span-3">
-            <SectionHeading
-              id="design-philosophy"
-              title={content.title}
-              description={content.description}
-            />
-          </div>
-          <div className="min-[900px]:col-start-3 min-[900px]:row-start-2 min-[900px]:justify-self-end">
+          <SectionHeading
+            id="design-philosophy"
+            title={content.title}
+            description={content.description}
+            variant="narrative"
+          />
+          <div className="mt-10 lg:mt-12">
             <SectionProgress total={content.principles.length} />
           </div>
         </div>
 
         <div
           data-design-principles-viewport
-          className="min-[900px]:h-[min(58vh,34rem)]"
+          className="lg:h-[min(66vh,40rem)]"
         >
           <div
             data-design-principles
