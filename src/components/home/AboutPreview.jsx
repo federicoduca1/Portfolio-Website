@@ -64,7 +64,6 @@ export default function AboutPreview({ content }) {
 
         <div
           className="grid w-full max-w-[23rem] justify-items-center gap-10 sm:gap-12 lg:justify-self-end"
-          data-about-reveal="cta"
         >
           <div className="relative grid w-[min(78vw,20rem)] justify-items-center lg:w-full">
             <Link
@@ -75,7 +74,9 @@ export default function AboutPreview({ content }) {
               <img
                 src={faceFront}
                 alt="Portrait of Federico Duca"
-                className="about-portrait-image pointer-events-none absolute left-1/2 top-0 block h-auto w-[94%] origin-center object-contain"
+                loading="lazy"
+                decoding="async"
+                className="about-portrait-image pointer-events-none absolute inset-0 block size-full origin-center object-contain"
               />
             </Link>
 
@@ -86,6 +87,7 @@ export default function AboutPreview({ content }) {
 
           <Link
             to={content.cta.path}
+            data-about-reveal="cta"
             className="group inline-flex items-center gap-3 text-2xl font-semibold text-neutral-200 transition-colors duration-300 hover:text-accent focus-visible:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-6 focus-visible:outline-focus-ring sm:text-3xl"
           >
             <span>{content.cta.label}</span>
