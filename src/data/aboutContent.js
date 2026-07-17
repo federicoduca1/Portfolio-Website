@@ -162,3 +162,179 @@ export const educationLearningContent = {
   note:
     "If there's one thing I've learned, it's that curiosity doesn't end when a course does. Most of what shaped the way I design came from exploring beyond classrooms, building side projects, reading, breaking things and starting again.",
 };
+
+export const personalExplorerContent = {
+  title: 'Things that shape me as a person (and designer).',
+  introduction:
+    'Small windows into the interests and experiences that influence how I observe, think and design.',
+  topics: [
+    {
+      id: 'cinema',
+      label: 'Cinema',
+      description:
+        'I love cinema because it lets me step into perspectives, places and emotions far from my own. I’m fascinated by how a story can stay with you long after the credits and quietly change the way you observe the world.',
+      groups: [
+        {
+          id: 'directors',
+          title: 'Directors I’m following lately',
+          items: [
+            'Quentin Tarantino',
+            'Christopher Nolan',
+            'Andrei Tarkovsky',
+            'Denis Villeneuve',
+            'Ari Aster',
+          ],
+        },
+        {
+          id: 'films',
+          title: 'Films I keep returning to',
+          items: [
+            'Arrival',
+            'Stalker',
+            'The Hateful Eight',
+            'Hereditary',
+            'Interstellar',
+          ],
+        },
+      ],
+    },
+    {
+      id: 'travel',
+      label: 'Travel',
+      description:
+        'Travel helps me slow down and notice how people move, communicate and adapt to different places. Every city gives me a new perspective and reminds me that there is never only one way to experience the world.',
+      groups: [
+        {
+          id: 'places',
+          title: 'Places that stayed with me',
+          items: ['Japan', 'Netherlands', 'Germany', 'Austria', 'Italy'],
+        },
+        {
+          id: 'observations',
+          title: 'What I look for',
+          items: [
+            'Everyday rituals',
+            'Public spaces',
+            'Local details',
+            'Unexpected encounters',
+            'New perspectives',
+          ],
+        },
+      ],
+    },
+    {
+      id: 'games',
+      label: 'Games',
+      description:
+        'Videogames have been part of my life for as long as I can remember. I love how they combine interaction, challenge, atmosphere and storytelling into experiences that can only exist through participation.',
+      groups: [
+        {
+          id: 'games',
+          title: 'Games I keep returning to',
+          items: [
+            'The Legend of Zelda',
+            'Death Stranding',
+            'Portal',
+            'The Last of Us',
+            'Minecraft',
+          ],
+        },
+        {
+          id: 'interests',
+          title: 'What fascinates me',
+          items: [
+            'World building',
+            'Interaction',
+            'Progression',
+            'Level design',
+            'Player agency',
+          ],
+        },
+      ],
+    },
+    {
+      id: 'technology',
+      label: 'Technology',
+      description:
+        'Technology makes me curious because it constantly creates new possibilities. I enjoy understanding how tools work, experimenting with them and discovering how they can become more approachable through design.',
+      groups: [
+        {
+          id: 'exploring',
+          title: 'Currently exploring',
+          items: [
+            'C#',
+            'React.Js',
+            'Unity',
+            'XR',
+            'Creative coding',
+          ],
+        },
+        {
+          id: 'interests',
+          title: 'What interests me',
+          items: [
+            'Prototyping',
+            'Emerging interfaces',
+            'Digital tools',
+            'Human-computer interaction',
+            'New mediums',
+          ],
+        },
+      ],
+    },
+    {
+      id: 'drawing',
+      label: 'Drawing',
+      description:
+        'Drawing is often the fastest way for me to think. It helps me observe more carefully, make ideas tangible and explore possibilities before they need to be precise.',
+      groups: [
+        {
+          id: 'subjects',
+          title: 'What I draw',
+          items: [
+            'Product sketches',
+            'Characters',
+            'Interfaces',
+            'Objects',
+            'Visual notes',
+          ],
+        },
+        {
+          id: 'benefits',
+          title: 'What it gives me',
+          items: [
+            'Observation',
+            'Clarity',
+            'Exploration',
+            'Patience',
+            'Visual thinking',
+          ],
+        },
+      ],
+    },
+    {
+      id: 'cooking',
+      label: 'Cooking',
+      description:
+        'Cooking is one of the places where I enjoy following a structure and then changing it along the way. It combines precision, experimentation and the satisfaction of making something for other people.',
+      groups: [
+        {
+          id: 'dishes',
+          title: 'I enjoy making',
+          items: ['Pasta', 'Risotto', 'Bread', 'Desserts', 'New recipes'],
+        },
+        {
+          id: 'reasons',
+          title: 'Why I enjoy it',
+          items: [
+            'Experimenting',
+            'Sharing',
+            'Learning by doing',
+            'Combining ingredients',
+            'Improving through repetition',
+          ],
+        },
+      ],
+    },
+  ],
+};

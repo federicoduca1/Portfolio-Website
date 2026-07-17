@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router';
 import ControlCenter from '../components/ControlCenter.jsx';
 import Footer from '../components/Footer.jsx';
 import Navbar from '../components/Navbar.jsx';
+import RouteScrollReset from '../components/RouteScrollReset.jsx';
 
 export default function MainLayout() {
   const location = useLocation();
@@ -9,6 +10,7 @@ export default function MainLayout() {
 
   return (
     <div className="min-h-screen bg-neutral-50 text-neutral-950">
+      <RouteScrollReset />
       <Navbar />
       <main
         className={
