@@ -1,20 +1,25 @@
+import { nintendoProjectConfig } from './nintendoCaseStudy.js';
+
 export const projects = [
   {
-    id: 'featured-project-01',
-    category: 'UX/UI Design',
-    title: 'Healthcare Platform',
-    description:
-      'Designing a digital experience that helps people navigate complex care journeys with clarity.',
-    metadata: 'Case study placeholder',
+    id: nintendoProjectConfig.id,
+    slug: nintendoProjectConfig.slug,
+    path: nintendoProjectConfig.path,
+    category: nintendoProjectConfig.category,
+    title: nintendoProjectConfig.title,
+    year: nintendoProjectConfig.year,
+    description: nintendoProjectConfig.statement,
+    metadata: nintendoProjectConfig.projectType,
     featured: true,
   },
   {
-    id: 'featured-project-02',
-    category: 'Product Design',
-    title: 'Learning Dashboard',
+    id: 'houra',
+    path: '/projects#houra',
+    category: 'Mobile Product',
+    title: 'Houra',
     description:
-      'Structuring a focused interface for progress, feedback and continuous learning.',
-    metadata: 'Case study placeholder',
+      'Designing a product where time becomes currency.',
+    metadata: 'Community Exchange Platform',
     featured: false,
   },
   {
