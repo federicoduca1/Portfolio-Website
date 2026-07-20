@@ -1,10 +1,11 @@
 import CaseStudyReflection from '../../case-study/CaseStudyReflection.jsx';
 import CaseStudySection from '../../case-study/CaseStudySection.jsx';
+import DiagnosticInsight from '../../case-study/DiagnosticInsight.jsx';
 import DesignPrinciples from '../../case-study/DesignPrinciples.jsx';
 import FeatureChapter from '../../case-study/FeatureChapter.jsx';
-import InsightChapter from '../../case-study/InsightChapter.jsx';
 import InteractionModule from '../../case-study/InteractionModule.jsx';
 import MediaPlaceholder from '../../case-study/MediaPlaceholder.jsx';
+import StickyEvidenceWalkthrough from '../../case-study/StickyEvidenceWalkthrough.jsx';
 import ValidationSplit from '../../case-study/ValidationSplit.jsx';
 
 function ChallengeSection({ content }) {
@@ -17,14 +18,38 @@ function ChallengeSection({ content }) {
       theme="light"
       width="wide"
     >
-      <div className="space-y-20 sm:space-y-24">
+      <p className="max-w-[52rem] border-l-2 border-[var(--project-accent)] pl-5 text-sm leading-[1.75] text-neutral-600 sm:text-base">
+        {content.methodology}
+      </p>
+
+      <div className="mt-14 grid gap-10 md:grid-cols-2 md:gap-10 xl:grid-cols-3 xl:gap-[clamp(2.5rem,4vw,4rem)]">
         {content.insights.map((insight, index) => (
-          <InsightChapter
+          <DiagnosticInsight
             key={insight.number}
-            index={index}
             insight={insight}
+            className={`${
+              index === 2 ? 'md:col-span-2 xl:col-span-1' : ''
+            } ${
+              index > 0
+                ? 'diagnostic-insight--divided border-t border-neutral-300 pt-8 md:border-t-0 md:pt-0'
+                : ''
+            }`}
           />
         ))}
+      </div>
+
+      <div className="mt-20 sm:mt-24">
+        <StickyEvidenceWalkthrough
+          heading={content.evidenceGallery.title}
+          introduction={content.evidenceGallery.introduction}
+          steps={content.evidenceGallery.steps}
+        />
+      </div>
+
+      <div className="mt-16 border-t border-neutral-300 pt-10 sm:mt-20 sm:pt-12">
+        <p className="max-w-[30ch] text-[clamp(1.75rem,3vw,3rem)] leading-[1.18] font-medium text-neutral-950">
+          {content.synthesis}
+        </p>
       </div>
     </CaseStudySection>
   );

@@ -74,7 +74,7 @@ function DesktopNavigation({ activeSectionId, project, sections }) {
   );
 
   return (
-    <aside className="hidden min-[1180px]:block">
+    <aside className="hidden min-[1180px]:block min-[1180px]:pt-[clamp(6rem,10vw,10rem)]">
       <nav
         aria-label={`${project.shortTitle} case study sections`}
         className="sticky top-[calc(var(--site-header-height)+1.5rem)] py-2"

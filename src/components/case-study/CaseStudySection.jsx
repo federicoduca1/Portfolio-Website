@@ -1,7 +1,7 @@
 const widthClasses = {
   prose: 'max-w-[45rem]',
   content: 'max-w-[60rem]',
-  wide: 'max-w-[68rem]',
+  wide: 'max-w-[68rem] min-[1180px]:max-w-none',
 };
 
 const themeClasses = {

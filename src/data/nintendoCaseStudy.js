@@ -1,3 +1,5 @@
+import analysisOneScreenshot from '../assets/projects/nintendo-eshop-redesign/case-study/analysis-1-screenshot.png';
+import analysisTwoScreenshot from '../assets/projects/nintendo-eshop-redesign/case-study/analysis-2-screenshot.png';
 import heroVisualImage from '../assets/projects/nintendo-eshop-redesign/hero/hero-visual-image.png';
 import heroScrollingMp4 from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling.mp4';
 import heroScrollingPoster from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling-poster.webp';
@@ -14,7 +16,7 @@ export const nintendoProjectConfig = {
   eyebrow: 'CONSOLE SOFTWARE DESIGN',
   projectType: 'PERSONAL PROJECT',
   role: 'Product Designer',
-  duration: 'To be confirmed',
+  duration: '8 weeks',
   statement:
     'Rethinking how players discover and navigate games through clearer information architecture and controller-first interaction.',
   disciplines: ['Product Design', 'UX/UI', 'Interaction Design'],
@@ -144,10 +146,12 @@ export const nintendoCaseStudyContent = {
   },
   challenge: {
     id: 'challenge',
-    eyebrow: '01 — DIAGNOSIS',
+    eyebrow: '02 — CHALLENGE',
     title: 'When structure fails, the experience suffers',
     introduction:
       'The Nintendo eShop is mainly navigated using a controller. Focus, hierarchy and positional feedback therefore need to remain clear and predictable as players move through the store.',
+    methodology:
+      'I evaluated the existing experience through a structured interface walkthrough, focusing on navigation, hierarchy, content organization and controller-based interaction.',
     insights: [
       {
         number: '01',
@@ -156,7 +160,6 @@ export const nintendoCaseStudyContent = {
           'Similar content appears across multiple sections, while overlapping entry points make the store difficult to understand as one coherent system.',
         implication:
           'Reduce duplication and give each destination a clearly defined purpose.',
-        mediaLabel: 'Fragmented storefront structure',
       },
       {
         number: '02',
@@ -165,7 +168,6 @@ export const nintendoCaseStudyContent = {
           'Browsing destinations and filtering controls behave like parallel navigation systems, making it difficult to understand whether users are moving somewhere new or refining the current content.',
         implication:
           'Separate global navigation from contextual refinement.',
-        mediaLabel: 'Navigation and filtering analysis',
       },
       {
         number: '03',
@@ -173,10 +175,44 @@ export const nintendoCaseStudyContent = {
         evidence:
           'Repetitive layouts, weak visual priority and limited positional feedback increase cognitive load and reduce the sense of progression.',
         implication:
-          'Establish stronger content hierarchy, focus feedback and location awareness.',
-        mediaLabel: 'Discovery hierarchy analysis',
+          'Establish stronger hierarchy, focus feedback and location awareness.',
       },
     ],
+    evidenceGallery: {
+      title: 'Evidence from the existing experience',
+      introduction:
+        'The same structural issues often overlap within a single browsing flow. The following screens highlight where they become visible in the interface.',
+      steps: [
+        {
+          id: 'fragmented-navigation',
+          title: 'Fragmented navigation',
+          description:
+            'Overlapping entry points and weak section hierarchy make browsing repetitive and difficult to scan.',
+          placeholderLabel: 'Existing eShop analysis — screen 01',
+          aspectRatio: '5113 / 3632',
+          alt: 'Annotated Nintendo eShop screen showing fragmented navigation and weak section hierarchy.',
+          media: {
+            src: analysisOneScreenshot,
+            fit: 'contain',
+          },
+        },
+        {
+          id: 'weak-orientation',
+          title: 'Weak orientation',
+          description:
+            'Limited position feedback and repetitive layouts make it harder to understand where users are and what has changed.',
+          placeholderLabel: 'Existing eShop analysis — screen 02',
+          aspectRatio: '5452 / 3967',
+          alt: 'Annotated Nintendo eShop screen showing weak orientation and repetitive browsing patterns.',
+          media: {
+            src: analysisTwoScreenshot,
+            fit: 'contain',
+          },
+        },
+      ],
+    },
+    synthesis:
+      'These issues were not isolated interface flaws, but symptoms of a fragmented structural model.',
   },
   architecture: {
     id: 'architecture',

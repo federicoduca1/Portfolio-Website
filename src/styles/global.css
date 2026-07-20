@@ -189,6 +189,29 @@ body {
   padding: clamp(6rem, 10vw, 10rem) clamp(1.25rem, 4vw, 4rem);
 }
 
+@media (min-width: 1180px) {
+  .case-study-body .case-study-section {
+    padding-inline: clamp(1.5rem, 2vw, 2.5rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  .diagnostic-insight--divided {
+    position: relative;
+  }
+
+  .diagnostic-insight--divided::before {
+    position: absolute;
+    top: 17%;
+    bottom: 6%;
+    left: clamp(-2rem, -2vw, -1.25rem);
+    width: 1px;
+    content: "";
+    background: rgb(163 163 163 / 0.42);
+    transform: translateX(-50%);
+  }
+}
+
 .case-study-media {
   border: 1px solid
     color-mix(in srgb, var(--project-accent) 28%, transparent);
