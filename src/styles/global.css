@@ -258,6 +258,37 @@ body {
   transform-origin: center bottom;
 }
 
+.transparent-diagram-media {
+  max-width: var(--diagram-max-width-compact, 100%);
+}
+
+.exploration-marquee__viewport {
+  cursor: grab;
+  scrollbar-width: none;
+  touch-action: pan-x pan-y;
+}
+
+.exploration-marquee__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.exploration-marquee__viewport[data-dragging="true"] {
+  cursor: grabbing;
+  user-select: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .exploration-marquee__viewport[data-custom-cursor="true"] {
+    cursor: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .transparent-diagram-media {
+    max-width: var(--diagram-max-width, 100%);
+  }
+}
+
 @media (min-width: 640px) and (max-width: 1023px) {
   .case-study-media__hero-breakout {
     transform: translate(

@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { createPortal } from 'react-dom';
 
-export default function PlaygroundDragCursor({ cursorRef }) {
+export default function PlaygroundDragCursor({ cursorRef, label = 'DRAG' }) {
   const pathId = `playground-drag-path-${useId().replaceAll(':', '')}`;
 
   return createPortal(
@@ -21,10 +21,10 @@ export default function PlaygroundDragCursor({ cursorRef }) {
         </defs>
         <text>
           <textPath href={`#${pathId}`} startOffset="4%">
-            DRAG
+            {label}
           </textPath>
           <textPath href={`#${pathId}`} startOffset="54%">
-            DRAG
+            {label}
           </textPath>
         </text>
       </svg>

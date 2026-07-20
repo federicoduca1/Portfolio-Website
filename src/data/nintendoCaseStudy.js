@@ -1,5 +1,18 @@
 import analysisOneScreenshot from '../assets/projects/nintendo-eshop-redesign/case-study/analysis-1-screenshot.png';
 import analysisTwoScreenshot from '../assets/projects/nintendo-eshop-redesign/case-study/analysis-2-screenshot.png';
+import originalIaImage from '../assets/projects/nintendo-eshop-redesign/case-study/original-IA.png';
+import redesignedIaImage from '../assets/projects/nintendo-eshop-redesign/case-study/redesigned-IA.png';
+import browseWireframeOne from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/browse-page-1.png';
+import browseWireframeTwo from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/browse-page-2.png';
+import browseWireframeFinal from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/browse-wireframes-def.png';
+import dealsWireframeOne from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/deals-page-1.png';
+import dealsWireframeTwo from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/deals-page-2.png';
+import dealsWireframeFinal from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/deals-wireframes-def.png';
+import discoverWireframeOne from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/discover-page-1.png';
+import discoverWireframeTwo from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/discover-page-2.png';
+import discoverWireframeFinal from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/discover-wireframes-def.png';
+import gamesWireframeOne from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/games-page-1.png';
+import gamesWireframeFinal from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/games-wireframes-def.png';
 import heroVisualImage from '../assets/projects/nintendo-eshop-redesign/hero/hero-visual-image.png';
 import heroScrollingMp4 from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling.mp4';
 import heroScrollingPoster from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling-poster.webp';
@@ -216,7 +229,7 @@ export const nintendoCaseStudyContent = {
   },
   architecture: {
     id: 'architecture',
-    eyebrow: '02 — SYSTEM',
+    eyebrow: '03 — ARCHITECTURE',
     title: 'Rebuilding the store around user intent',
     introduction:
       'Rather than treating every section as another catalog page, the redesigned architecture assigns each destination a specific role.',
@@ -238,29 +251,155 @@ export const nintendoCaseStudyContent = {
       },
     ],
     comparison: {
-      original: 'Original information architecture',
-      redesigned: 'Redesigned information architecture',
-      caption:
-        'The redesign replaces overlapping storefront destinations with roles organized around distinct player intentions.',
+      chapterLabel: 'Architecture transformation',
+      introduction:
+        'The redesign consolidates overlapping destinations and gives each area a distinct role based on user intent.',
+      original: {
+        label: 'Before',
+        mediaLabel: 'Original information architecture',
+        caption:
+          'Overlapping sections and duplicated entry points made the store difficult to understand as one coherent system.',
+        aspectRatio: '12728 / 8494',
+        maxWidth: '72%',
+        compactMaxWidth: '100%',
+        alignment: 'left',
+        scale: 1,
+        media: {
+          src: originalIaImage,
+          alt: 'Original Nintendo eShop information architecture showing overlapping storefront destinations and entry points.',
+        },
+      },
+      transition:
+        'The new structure separates curated discovery, structured browsing, deals and complete catalog exploration.',
+      redesigned: {
+        label: 'After',
+        mediaLabel: 'Redesigned information architecture',
+        caption:
+          'Each destination now supports a distinct browsing intent while navigation and refinement remain clearly separated.',
+        aspectRatio: '11090 / 5915',
+        maxWidth: '100%',
+        compactMaxWidth: '100%',
+        alignment: 'center',
+        scale: 1,
+        media: {
+          src: redesignedIaImage,
+          alt: 'Redesigned Nintendo eShop information architecture organized around distinct browsing intents.',
+        },
+      },
     },
   },
   discovery: {
     id: 'discovery',
-    eyebrow: '03 — DISCOVERY',
-    title: 'Four destinations, four different user intentions',
+    eyebrow: '04 — DISCOVERY',
+    title: 'Shaping four destinations around user intent',
     introduction:
-      'The redesign avoids repeating the same catalog structure across every destination. Each area uses a different hierarchy based on what users are trying to accomplish.',
-    features: [
+      'The redesign required more than assigning names to four sections. Each destination needed a distinct hierarchy, rhythm and level of control based on what users were trying to accomplish.',
+    explorations: {
+      label: 'Early explorations',
+      autoplay: true,
+      pauseOnHover: true,
+      speed: 26,
+      gap: 'clamp(0.4rem, 0.8vw, 0.75rem)',
+      introduction:
+        'I explored multiple arrangements for content hierarchy, navigation and focus behaviour before consolidating the final wireframe system.',
+      items: [
+        {
+          id: 'editorial-hierarchy',
+          label: 'Exploration 01',
+          caption: 'Editorial hierarchy',
+          size: 'portrait',
+          aspectRatio: '1188 / 3512',
+          media: {
+            src: discoverWireframeOne,
+            alt: 'Early Discover wireframe exploring editorial content hierarchy.',
+          },
+        },
+        {
+          id: 'navigation-refinement',
+          label: 'Exploration 02',
+          caption: 'Content grouping',
+          size: 'medium',
+          aspectRatio: '1292 / 3004',
+          media: {
+            src: discoverWireframeTwo,
+            alt: 'Early Discover wireframe exploring alternative content grouping.',
+          },
+        },
+        {
+          id: 'catalog-density',
+          label: 'Exploration 03',
+          caption: 'Navigation alternative',
+          size: 'portrait',
+          aspectRatio: '1556 / 3192',
+          media: {
+            src: browseWireframeOne,
+            alt: 'Early Browse wireframe exploring an alternative navigation structure.',
+          },
+        },
+        {
+          id: 'filter-placement',
+          label: 'Exploration 04',
+          caption: 'Browse variation',
+          size: 'medium',
+          aspectRatio: '1600 / 3628',
+          media: {
+            src: browseWireframeTwo,
+            alt: 'Early Browse wireframe exploring a different page arrangement.',
+          },
+        },
+        {
+          id: 'focus-behaviour',
+          label: 'Exploration 05',
+          caption: 'Catalog density',
+          size: 'medium',
+          aspectRatio: '1536 / 2076',
+          media: {
+            src: dealsWireframeOne,
+            alt: 'Early Deals wireframe exploring catalog density and comparison.',
+          },
+        },
+        {
+          id: 'sidebar-exploration',
+          label: 'Exploration 06',
+          caption: 'Filter placement',
+          size: 'portrait',
+          aspectRatio: '1824 / 2548',
+          media: {
+            src: dealsWireframeTwo,
+            alt: 'Early Deals wireframe exploring filter placement and content priority.',
+          },
+        },
+        {
+          id: 'content-grouping',
+          label: 'Exploration 07',
+          size: 'wide',
+          aspectRatio: '1916 / 2076',
+          caption: 'Focus behaviour',
+          media: {
+            src: gamesWireframeOne,
+            alt: 'Early All Games wireframe exploring focus behaviour and catalog structure.',
+          },
+        },
+      ],
+    },
+    transition: {
+      lines: ['From a exploration', 'To a coherent system'],
+    },
+    destinations: [
       {
         id: 'discover',
         label: 'Discover',
         intention: 'Inspiration',
         audience: 'For users who do not yet know what they want.',
         decision:
-          'Prioritize a limited number of meaningful editorial and personalized sections rather than presenting the entire catalog at once.',
-        wireframeLabel: 'Discover wireframe',
-        interfaceLabel: 'Discover final interface',
-        layout: 'wide',
+          'Prioritize a limited number of meaningful editorial and personalized sections rather than exposing the complete catalog at once.',
+        mediaLabel: 'Discover consolidated wireframe',
+        aspectRatio: '1170 / 2254',
+        media: {
+          src: discoverWireframeFinal,
+          alt: 'Consolidated Discover destination wireframe showing the complete storefront page hierarchy.',
+        },
+        layout: 'visual-right',
       },
       {
         id: 'browse',
@@ -269,10 +408,14 @@ export const nintendoCaseStudyContent = {
         audience:
           'For users who want to explore through genres, themes and curated collections.',
         decision:
-          'Provide multiple structured entry points without turning filters into the main form of navigation.',
-        wireframeLabel: 'Browse wireframe',
-        interfaceLabel: 'Browse final interface',
-        layout: 'split',
+          'Provide structured entry points without turning filters into the main form of navigation.',
+        mediaLabel: 'Browse consolidated wireframe',
+        aspectRatio: '4680 / 5892',
+        media: {
+          src: browseWireframeFinal,
+          alt: 'Consolidated Browse destination wireframe showing structured exploration and refinement.',
+        },
+        layout: 'visual-left',
       },
       {
         id: 'deals',
@@ -281,9 +424,13 @@ export const nintendoCaseStudyContent = {
         audience: 'For users evaluating discounted content.',
         decision:
           'Prioritize price, discount and time-sensitive information for fast scanning and comparison.',
-        wireframeLabel: 'Deals wireframe',
-        interfaceLabel: 'Deals final interface',
-        layout: 'split',
+        mediaLabel: 'Deals consolidated wireframe',
+        aspectRatio: '1170 / 1442',
+        media: {
+          src: dealsWireframeFinal,
+          alt: 'Consolidated Deals destination wireframe emphasizing discounts and comparison information.',
+        },
+        layout: 'visual-right',
       },
       {
         id: 'all-games',
@@ -292,9 +439,13 @@ export const nintendoCaseStudyContent = {
         audience: 'For users who want direct access to the complete catalog.',
         decision:
           'Use progressive filtering and persistent feedback to support intentional search.',
-        wireframeLabel: 'All Games wireframe',
-        interfaceLabel: 'All Games final interface',
-        layout: 'wide',
+        mediaLabel: 'All Games consolidated wireframe',
+        aspectRatio: '4680 / 5020',
+        media: {
+          src: gamesWireframeFinal,
+          alt: 'Consolidated All Games destination wireframe showing the complete catalog and filtering system.',
+        },
+        layout: 'visual-left',
       },
     ],
   },

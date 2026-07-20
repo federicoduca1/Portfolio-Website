@@ -1,11 +1,13 @@
 import CaseStudyReflection from '../../case-study/CaseStudyReflection.jsx';
 import CaseStudySection from '../../case-study/CaseStudySection.jsx';
+import DestinationWireframeChapter from '../../case-study/DestinationWireframeChapter.jsx';
 import DiagnosticInsight from '../../case-study/DiagnosticInsight.jsx';
 import DesignPrinciples from '../../case-study/DesignPrinciples.jsx';
-import FeatureChapter from '../../case-study/FeatureChapter.jsx';
+import ExplorationMarquee from '../../case-study/ExplorationMarquee.jsx';
 import InteractionModule from '../../case-study/InteractionModule.jsx';
 import MediaPlaceholder from '../../case-study/MediaPlaceholder.jsx';
 import StickyEvidenceWalkthrough from '../../case-study/StickyEvidenceWalkthrough.jsx';
+import TransparentDiagramMedia from '../../case-study/TransparentDiagramMedia.jsx';
 import ValidationSplit from '../../case-study/ValidationSplit.jsx';
 
 function ChallengeSection({ content }) {
@@ -56,40 +58,7 @@ function ChallengeSection({ content }) {
 }
 
 function ArchitectureSection({ content }) {
-  return (
-    <CaseStudySection
-      id={content.id}
-      eyebrow={content.eyebrow}
-      title={content.title}
-      introduction={content.introduction}
-      theme="dark"
-      width="wide"
-    >
-      <DesignPrinciples principles={content.principles} />
-
-      <div className="mt-16 sm:mt-20">
-        <div className="grid gap-5 sm:grid-cols-2">
-          <MediaPlaceholder
-            label={content.comparison.original}
-            aspect="detail"
-            tone="dark"
-          />
-          <MediaPlaceholder
-            label={content.comparison.redesigned}
-            aspect="detail"
-            tone="dark"
-          />
-        </div>
-        <p className="mt-5 max-w-[48rem] text-sm leading-relaxed text-neutral-400 sm:text-base">
-          {content.comparison.caption}
-        </p>
-      </div>
-    </CaseStudySection>
-  );
-}
-
-function DiscoverySection({ content }) {
-  const [discover, browse, deals, allGames] = content.features;
+  const { comparison } = content;
 
   return (
     <CaseStudySection
@@ -100,13 +69,103 @@ function DiscoverySection({ content }) {
       theme="light"
       width="wide"
     >
-      <div className="space-y-16 sm:space-y-20">
-        <FeatureChapter feature={discover} />
-        <div className="grid gap-14 lg:grid-cols-2 lg:gap-10">
-          <FeatureChapter feature={browse} />
-          <FeatureChapter feature={deals} />
+      <DesignPrinciples
+        layout="rows"
+        principles={content.principles}
+        tone="light"
+      />
+
+      <div className="mt-16 rounded-2xl bg-[var(--project-surface)] px-6 py-12 text-neutral-50 sm:mt-20 sm:px-10 sm:py-16 lg:mt-24 lg:px-[clamp(3rem,6vw,6rem)] lg:py-20">
+        <header className="max-w-[46rem]">
+          <h3 className="text-xs font-semibold tracking-[0.14em] text-[var(--project-accent)] uppercase sm:text-sm">
+            {comparison.chapterLabel}
+          </h3>
+          <p className="mt-4 text-xl leading-[1.45] text-neutral-300 sm:text-2xl">
+            {comparison.introduction}
+          </p>
+        </header>
+
+        <div className="mt-14 sm:mt-16 lg:mt-20">
+          <p className="mb-5 text-xs font-semibold tracking-[0.14em] text-neutral-400 uppercase sm:text-sm">
+            {comparison.original.label}
+          </p>
+          <TransparentDiagramMedia
+            alignment={comparison.original.alignment}
+            aspectRatio={comparison.original.aspectRatio}
+            caption={comparison.original.caption}
+            compactMaxWidth={comparison.original.compactMaxWidth}
+            label={comparison.original.mediaLabel}
+            maxWidth={comparison.original.maxWidth}
+            media={comparison.original.media}
+            scale={comparison.original.scale}
+            tone="dark"
+          />
         </div>
-        <FeatureChapter feature={allGames} />
+
+        <div className="my-16 flex max-w-[52rem] items-stretch gap-5 sm:my-20 sm:gap-6 lg:my-24">
+          <span
+            aria-hidden="true"
+            className="block w-0.5 shrink-0 self-stretch rounded-full bg-[var(--project-accent)]"
+          />
+          <p className="text-[clamp(1.6rem,3vw,2.75rem)] leading-[1.2] font-medium text-neutral-50">
+            {comparison.transition}
+          </p>
+        </div>
+
+        <div>
+          <p className="mb-5 text-xs font-semibold tracking-[0.14em] text-neutral-400 uppercase sm:text-sm">
+            {comparison.redesigned.label}
+          </p>
+          <TransparentDiagramMedia
+            alignment={comparison.redesigned.alignment}
+            aspectRatio={comparison.redesigned.aspectRatio}
+            caption={comparison.redesigned.caption}
+            compactMaxWidth={comparison.redesigned.compactMaxWidth}
+            label={comparison.redesigned.mediaLabel}
+            maxWidth={comparison.redesigned.maxWidth}
+            media={comparison.redesigned.media}
+            scale={comparison.redesigned.scale}
+            tone="dark"
+          />
+        </div>
+      </div>
+    </CaseStudySection>
+  );
+}
+
+function DiscoverySection({ content }) {
+  return (
+    <CaseStudySection
+      id={content.id}
+      eyebrow={content.eyebrow}
+      title={content.title}
+      introduction={content.introduction}
+      theme="light"
+      width="wide"
+    >
+      <ExplorationMarquee {...content.explorations} />
+
+      <div className="my-16 flex max-w-[52rem] items-stretch gap-5 sm:my-20 sm:gap-6 lg:my-24">
+        <span
+          aria-hidden="true"
+          className="block w-0.5 shrink-0 self-stretch rounded-full bg-[var(--project-accent)]"
+        />
+        <p className="text-[clamp(1.6rem,3vw,2.75rem)] leading-[1.2] font-medium text-neutral-900 uppercase">
+          {content.transition.lines.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+        </p>
+      </div>
+
+      <div className="space-y-20 sm:space-y-24 lg:space-y-32">
+        {content.destinations.map((destination) => (
+          <DestinationWireframeChapter
+            key={destination.id}
+            destination={destination}
+          />
+        ))}
       </div>
     </CaseStudySection>
   );
