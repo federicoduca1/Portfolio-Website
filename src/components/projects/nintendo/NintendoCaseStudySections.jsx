@@ -5,7 +5,7 @@ import DiagnosticInsight from '../../case-study/DiagnosticInsight.jsx';
 import DesignPrinciples from '../../case-study/DesignPrinciples.jsx';
 import ExplorationMarquee from '../../case-study/ExplorationMarquee.jsx';
 import InteractionModule from '../../case-study/InteractionModule.jsx';
-import MediaPlaceholder from '../../case-study/MediaPlaceholder.jsx';
+import OutcomeVisualChapter from '../../case-study/OutcomeVisualChapter.jsx';
 import StickyEvidenceWalkthrough from '../../case-study/StickyEvidenceWalkthrough.jsx';
 import TransparentDiagramMedia from '../../case-study/TransparentDiagramMedia.jsx';
 import ValidationSplit from '../../case-study/ValidationSplit.jsx';
@@ -178,50 +178,52 @@ function InteractionSection({ content }) {
       eyebrow={content.eyebrow}
       title={content.title}
       introduction={content.introduction}
-      theme="dark"
+      theme="light"
       width="wide"
+      titleClassName="!max-w-[22ch] !text-[clamp(2.5rem,4.4vw,4.25rem)]"
     >
-      <div className="space-y-16 sm:space-y-20">
+      <div className="space-y-20 sm:space-y-24 lg:space-y-32">
         {content.modules.map((module, index) => (
           <InteractionModule key={module.id} index={index} module={module} />
         ))}
+      </div>
+
+      <div className="mt-16 border-t border-neutral-300 pt-9 sm:mt-20 sm:pt-10">
+        <p className="max-w-[38rem] text-[clamp(1.5rem,2.6vw,2.35rem)] leading-[1.3] font-medium text-neutral-900">
+          {content.synthesis}
+        </p>
       </div>
     </CaseStudySection>
   );
 }
 
 function OutcomeSection({ content }) {
-  const [primaryGroup, ...detailGroups] = content.groups;
-
   return (
     <CaseStudySection
       id={content.id}
       eyebrow={content.eyebrow}
       title={content.title}
-      theme="dark"
+      introduction={content.introduction}
+      theme="light"
       width="wide"
+      titleClassName="!max-w-[20ch] !text-[clamp(2.5rem,4.5vw,4.35rem)]"
     >
-      <MediaPlaceholder
-        label={primaryGroup.mediaLabel}
-        caption={primaryGroup.title}
-        aspect="video"
-        tone="dark"
-      />
+      <OutcomeVisualChapter chapter={content.finalExperience} />
 
-      <div className="mt-6 grid gap-6 sm:grid-cols-[1.15fr_0.85fr]">
-        {detailGroups.map((group, index) => (
-          <MediaPlaceholder
-            key={group.title}
-            label={group.mediaLabel}
-            caption={group.title}
-            aspect={index === 0 ? 'landscape' : 'detail'}
-            tone="dark"
-          />
+      <div className="mt-24 space-y-24 sm:mt-28 sm:space-y-28 lg:mt-32 lg:space-y-36">
+        {content.visualChapters.map((chapter) => (
+          <OutcomeVisualChapter key={chapter.id} chapter={chapter} />
         ))}
       </div>
 
-      <div className="mt-16 sm:mt-20">
+      <div className="mt-24 border-t border-neutral-300 pt-12 sm:mt-28 sm:pt-14 lg:mt-32 lg:pt-16">
         <ValidationSplit content={content.validation} />
+      </div>
+
+      <div className="mt-16 border-t border-neutral-300 pt-10 sm:mt-20 sm:pt-12">
+        <p className="max-w-[40rem] text-[clamp(1.6rem,2.8vw,2.6rem)] leading-[1.28] font-medium text-neutral-900">
+          {content.closing}
+        </p>
       </div>
     </CaseStudySection>
   );

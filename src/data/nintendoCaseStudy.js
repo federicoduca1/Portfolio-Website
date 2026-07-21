@@ -13,6 +13,12 @@ import discoverWireframeTwo from '../assets/projects/nintendo-eshop-redesign/cas
 import discoverWireframeFinal from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/discover-wireframes-def.png';
 import gamesWireframeOne from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/games-page-1.png';
 import gamesWireframeFinal from '../assets/projects/nintendo-eshop-redesign/case-study/wireframes/games-wireframes-def.png';
+import defaultInteractionState from '../assets/projects/nintendo-eshop-redesign/case-study/interactions/default-state-interaction.png';
+import filterDrawerAnimationWebm from '../assets/projects/nintendo-eshop-redesign/case-study/interactions/filter-drawer-animation.webm';
+import focusedInteractionState from '../assets/projects/nintendo-eshop-redesign/case-study/interactions/focused-state-interaction.png';
+import pressedInteractionState from '../assets/projects/nintendo-eshop-redesign/case-study/interactions/pressed-state-interaction.png';
+import sidebarAnimationWebm from '../assets/projects/nintendo-eshop-redesign/case-study/interactions/sidebar-animation.webm';
+import nintendoSwitchVisualOne from '../assets/projects/nintendo-eshop-redesign/case-study/outcome/nintendoswitch-visual-1.png';
 import heroVisualImage from '../assets/projects/nintendo-eshop-redesign/hero/hero-visual-image.png';
 import heroScrollingMp4 from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling.mp4';
 import heroScrollingPoster from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling-poster.webp';
@@ -451,7 +457,7 @@ export const nintendoCaseStudyContent = {
   },
   interaction: {
     id: 'interaction',
-    eyebrow: '04 — INTERACTION',
+    eyebrow: '05 — INTERACTION',
     title: 'Designing navigation for a controller-first environment',
     introduction:
       'In a controller-based interface, focus replaces the cursor. Every interactive element must communicate where the user is, what can be selected and what will happen next.',
@@ -460,54 +466,214 @@ export const nintendoCaseStudyContent = {
         id: 'focus-system',
         title: 'Focus system',
         description:
-          'Focus must be visible, predictable and consistent across every interactive state.',
-        media: ['Default focus state', 'Focused state', 'Pressed state'],
+          'Focus must remain visible, predictable and consistent across every interactive state.',
+        variant: 'focus-sequence',
+        media: {
+          label: 'Default to focused to pressed state sequence',
+          states: [
+            {
+              label: 'Default',
+              src: defaultInteractionState,
+              alt: 'Nintendo eShop navigation item in its default state.',
+            },
+            {
+              label: 'Focused',
+              src: focusedInteractionState,
+              alt: 'Nintendo eShop navigation item in its focused controller state.',
+            },
+            {
+              label: 'Pressed',
+              src: pressedInteractionState,
+              alt: 'Nintendo eShop navigation item in its pressed controller state.',
+            },
+          ],
+        },
       },
       {
         id: 'adaptive-navigation',
         title: 'Adaptive navigation',
         description:
-          'The sidebar preserves orientation while adapting to the content space available.',
-        media: ['Collapsed sidebar', 'Expanded sidebar'],
+          'The sidebar expands when labels improve orientation and collapses when content needs more space.',
+        variant: 'animation',
+        layout: 'split',
+        media: {
+          label: 'Adaptive navigation animation',
+          webm: sidebarAnimationWebm,
+          aspectRatio: '16 / 9',
+          theme: 'dark',
+          surface: 'transparent',
+          radius: 'large',
+          fit: 'cover',
+          decorative: true,
+          autoplay: true,
+          loop: true,
+          muted: true,
+          playsInline: true,
+          preload: 'metadata',
+        },
+        steps: [
+          {
+            label: 'Collapsed',
+            description: 'Preserves more space for content.',
+          },
+          {
+            label: 'Expanded',
+            description: 'Reveals labels when orientation is needed.',
+          },
+        ],
       },
       {
         id: 'contextual-filtering',
         title: 'Contextual filtering',
         description:
-          'Filters live in a dedicated contextual layer rather than competing with global navigation.',
-        media: ['Filters drawer'],
+          'Filters open as a temporary layer over the current catalog, preserving context while users refine results.',
+        variant: 'animation',
+        layout: 'stacked',
+        media: {
+          label: 'Contextual filtering animation',
+          webm: filterDrawerAnimationWebm,
+          aspectRatio: '16 / 9',
+          theme: 'dark',
+          surface: 'transparent',
+          radius: 'large',
+          fit: 'cover',
+          decorative: true,
+          autoplay: true,
+          loop: true,
+          muted: true,
+          playsInline: true,
+          preload: 'metadata',
+        },
+        steps: [
+          {
+            label: 'Closed',
+            description: 'The current catalog remains visible.',
+          },
+          {
+            label: 'Open',
+            description:
+              'Filtering appears as a temporary contextual layer.',
+          },
+          {
+            label: 'Applied',
+            description:
+              'Results update without moving users to a new destination.',
+          },
+        ],
       },
     ],
+    synthesis:
+      'Clear feedback turns controller input into predictable navigation.',
   },
   outcome: {
     id: 'outcome',
-    eyebrow: '05 — OUTCOME',
+    eyebrow: '06 — OUTCOME',
     title: 'A clearer way to explore the catalog',
-    groups: [
+    introduction:
+      'A final storefront experience where discovery, browsing and controller interaction work as one coherent system.',
+    finalExperience: {
+      id: 'final-experience',
+      label: 'The final experience',
+      layout: 'hero',
+      items: [
+        {
+          id: 'complete-storefront',
+          label: 'Complete storefront experience',
+          caption:
+            'The complete storefront experience, from inspiration to intentional catalog exploration.',
+          aspectRatio: '5843 / 4312',
+          theme: 'dark',
+          surface: 'transparent',
+          maxWidth: '90%',
+          media: {
+            type: 'image',
+            src: nintendoSwitchVisualOne,
+            alt: 'Nintendo Switch displaying the final redesigned eShop Discover experience.',
+            fit: 'contain',
+          },
+        },
+      ],
+    },
+    visualChapters: [
       {
-        title: 'Discover and explore',
-        mediaLabel: 'Discover and explore experience',
-        size: 'large',
+        id: 'discover-explore',
+        label: 'Discover and explore',
+        copy:
+          'Curated content and structured entry points support both inspiration and open-ended exploration.',
+        layout: 'dominant-support',
+        items: [
+          {
+            id: 'discover-browse-experience',
+            label: 'Discover and Browse experience',
+            aspectRatio: '16 / 9',
+          },
+          {
+            id: 'editorial-discovery-detail',
+            label: 'Editorial discovery detail',
+            aspectRatio: '4 / 3',
+          },
+        ],
       },
       {
-        title: 'Compare and refine',
-        mediaLabel: 'Compare and refine details',
-        size: 'small',
+        id: 'compare-refine',
+        label: 'Compare and refine',
+        copy:
+          'Price, discount and refinement tools make intentional browsing faster and easier to scan.',
+        layout: 'asymmetric',
+        items: [
+          {
+            id: 'deals-games-experience',
+            label: 'Deals and All Games experience',
+            aspectRatio: '4 / 3',
+          },
+          {
+            id: 'filtering-interaction',
+            label: 'Filtering interaction',
+            aspectRatio: '16 / 10',
+          },
+          {
+            id: 'price-refinement-detail',
+            label: 'Price and refinement detail',
+            aspectRatio: '16 / 10',
+          },
+        ],
       },
       {
-        title: 'Stay oriented',
-        mediaLabel: 'Navigation orientation details',
-        size: 'small',
+        id: 'stay-oriented',
+        label: 'Stay oriented',
+        copy:
+          'Persistent navigation and predictable focus feedback help players understand where they are and what will happen next.',
+        layout: 'detail',
+        items: [
+          {
+            id: 'navigation-orientation',
+            label: 'Navigation orientation detail',
+            aspectRatio: '16 / 7',
+          },
+          {
+            id: 'focus-feedback',
+            label: 'Focus feedback detail',
+            aspectRatio: '16 / 10',
+          },
+          {
+            id: 'controller-interaction',
+            label: 'Controller interaction detail',
+            aspectRatio: '16 / 10',
+          },
+        ],
       },
     ],
     validation: {
+      label: 'Validation & next steps',
+      introduction:
+        'The concept demonstrates a coherent design direction, but its effectiveness still needs to be validated with players using a real controller.',
       demonstrated: {
         title: 'What the current concept demonstrates',
         items: [
           'Clearer structural separation',
           'Stronger content hierarchy',
-          'Dedicated navigation and filtering layers',
-          'Defined controller focus states',
+          'Dedicated navigation and refinement layers',
+          'Consistent controller focus states',
         ],
       },
       pending: {
@@ -522,6 +688,8 @@ export const nintendoCaseStudyContent = {
         ],
       },
     },
+    closing:
+      'The final result is not only a clearer interface, but a storefront designed around how players actually explore from a console.',
   },
   reflection: {
     id: 'reflection',

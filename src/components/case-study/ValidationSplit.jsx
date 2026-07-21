@@ -1,22 +1,16 @@
-function ValidationColumn({ content, accent = false }) {
+function ValidationColumn({ content }) {
   return (
     <div>
-      <h3 className="max-w-[20ch] text-2xl leading-tight font-medium sm:text-3xl">
+      <h4 className="max-w-[24ch] text-xl leading-tight font-medium sm:text-2xl">
         {content.title}
-      </h3>
-      <ul className="mt-7 border-t border-neutral-300">
+      </h4>
+      <ul className="mt-6 border-t border-neutral-300">
         {content.items.map((item) => (
           <li
             key={item}
-            className="grid grid-cols-[1rem_1fr] gap-3 border-b border-neutral-300 py-4 text-base leading-[1.55] text-neutral-700"
+            className="border-b border-neutral-300 py-4 text-base leading-[1.55] text-neutral-700"
           >
-            <span
-              aria-hidden="true"
-              className={`mt-[0.55rem] h-1.5 w-1.5 rounded-full ${
-                accent ? 'bg-[var(--project-accent)]' : 'bg-neutral-400'
-              }`}
-            />
-            <span>{item}</span>
+            {item}
           </li>
         ))}
       </ul>
@@ -26,12 +20,21 @@ function ValidationColumn({ content, accent = false }) {
 
 export default function ValidationSplit({ content }) {
   return (
-    <section
-      aria-label="Concept validation status"
-      className="bg-neutral-50 px-6 py-10 text-neutral-950 sm:px-9 sm:py-12 lg:px-12 lg:py-14"
-    >
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <ValidationColumn content={content.demonstrated} accent />
+    <section aria-labelledby="outcome-validation-title">
+      <header className="max-w-[48rem]">
+        <h3
+          id="outcome-validation-title"
+          className="text-xs font-semibold tracking-[0.13em] text-[var(--project-accent)] uppercase sm:text-sm"
+        >
+          {content.label}
+        </h3>
+        <p className="mt-4 text-lg leading-[1.65] text-neutral-700 sm:text-xl">
+          {content.introduction}
+        </p>
+      </header>
+
+      <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <ValidationColumn content={content.demonstrated} />
         <ValidationColumn content={content.pending} />
       </div>
     </section>

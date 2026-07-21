@@ -18,6 +18,7 @@ export default function CaseStudySection({
   theme = 'light',
   width = 'content',
   className = '',
+  titleClassName = '',
   children,
 }) {
   const widthClass = widthClasses[width] ?? widthClasses.content;
@@ -42,7 +43,7 @@ export default function CaseStudySection({
           id={`${id}-title`}
           tabIndex="-1"
           data-case-study-heading
-          className="max-w-[18ch] text-[clamp(2.5rem,5vw,4.75rem)] leading-[1.02] font-medium focus:outline-none"
+          className={`max-w-[18ch] text-[clamp(2.5rem,5vw,4.75rem)] leading-[1.02] font-medium focus:outline-none ${titleClassName}`}
         >
           {title}
         </h2>
