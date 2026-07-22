@@ -39,7 +39,12 @@ export default function NintendoEshopCaseStudy() {
       <ProjectOverview {...content.overview} />
       <CaseStudyVisualBreak {...content.visualBreak} />
 
-      <CaseStudyLayout project={project}>
+      <CaseStudyLayout
+        navigationStickyEndId="next-project"
+        navigationStickyStartId="challenge"
+        navigationStickyStopId={content.reflection.navigationStopId}
+        project={project}
+      >
         <NintendoCaseStudySections content={content} />
       </CaseStudyLayout>
 

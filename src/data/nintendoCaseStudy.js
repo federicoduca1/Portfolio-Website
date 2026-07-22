@@ -18,7 +18,15 @@ import filterDrawerAnimationWebm from '../assets/projects/nintendo-eshop-redesig
 import focusedInteractionState from '../assets/projects/nintendo-eshop-redesign/case-study/interactions/focused-state-interaction.png';
 import pressedInteractionState from '../assets/projects/nintendo-eshop-redesign/case-study/interactions/pressed-state-interaction.png';
 import sidebarAnimationWebm from '../assets/projects/nintendo-eshop-redesign/case-study/interactions/sidebar-animation.webm';
+import browseFinalVisual from '../assets/projects/nintendo-eshop-redesign/case-study/outcome/browse-def.png';
+import dealsFinalVisual from '../assets/projects/nintendo-eshop-redesign/case-study/outcome/deals-def.png';
+import discoverMockupRender from '../assets/projects/nintendo-eshop-redesign/case-study/outcome/discover-mockup-render.png';
+import discoveryFinalVisual from '../assets/projects/nintendo-eshop-redesign/case-study/outcome/discovery-visual-def.png';
+import activatingFilterWebm from '../assets/projects/nintendo-eshop-redesign/case-study/outcome/activing-filter .webm';
+import allGamesFinalVisual from '../assets/projects/nintendo-eshop-redesign/case-study/outcome/allgames-def.png';
 import nintendoSwitchVisualOne from '../assets/projects/nintendo-eshop-redesign/case-study/outcome/nintendoswitch-visual-1.png';
+import recommendedScrollingWebm from '../assets/projects/nintendo-eshop-redesign/case-study/outcome/recommended-scrolling.webm';
+import verticalScrollingWebm from '../assets/projects/nintendo-eshop-redesign/case-study/outcome/vertical-scrolling.webm';
 import heroVisualImage from '../assets/projects/nintendo-eshop-redesign/hero/hero-visual-image.png';
 import heroScrollingMp4 from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling.mp4';
 import heroScrollingPoster from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling-poster.webp';
@@ -35,7 +43,7 @@ export const nintendoProjectConfig = {
   eyebrow: 'CONSOLE SOFTWARE DESIGN',
   projectType: 'PERSONAL PROJECT',
   role: 'Product Designer',
-  duration: '8 weeks',
+  duration: '6 weeks',
   statement:
     'Rethinking how players discover and navigate games through clearer information architecture and controller-first interaction.',
   disciplines: ['Product Design', 'UX/UI', 'Interaction Design'],
@@ -230,8 +238,6 @@ export const nintendoCaseStudyContent = {
         },
       ],
     },
-    synthesis:
-      'These issues were not isolated interface flaws, but symptoms of a fragmented structural model.',
   },
   architecture: {
     id: 'architecture',
@@ -389,7 +395,7 @@ export const nintendoCaseStudyContent = {
       ],
     },
     transition: {
-      lines: ['From a exploration', 'To a coherent system'],
+      lines: ['From an exploration', 'to a coherent system'],
     },
     destinations: [
       {
@@ -562,8 +568,6 @@ export const nintendoCaseStudyContent = {
         ],
       },
     ],
-    synthesis:
-      'Clear feedback turns controller input into predictable navigation.',
   },
   outcome: {
     id: 'outcome',
@@ -573,18 +577,15 @@ export const nintendoCaseStudyContent = {
       'A final storefront experience where discovery, browsing and controller interaction work as one coherent system.',
     finalExperience: {
       id: 'final-experience',
-      label: 'The final experience',
       layout: 'hero',
       items: [
         {
           id: 'complete-storefront',
           label: 'Complete storefront experience',
-          caption:
-            'The complete storefront experience, from inspiration to intentional catalog exploration.',
           aspectRatio: '5843 / 4312',
           theme: 'dark',
           surface: 'transparent',
-          maxWidth: '90%',
+          maxWidth: '100%',
           media: {
             type: 'image',
             src: nintendoSwitchVisualOne,
@@ -600,118 +601,317 @@ export const nintendoCaseStudyContent = {
         label: 'Discover and explore',
         copy:
           'Curated content and structured entry points support both inspiration and open-ended exploration.',
-        layout: 'dominant-support',
+        layout: 'staggered',
+        supportingMediaGroupTheme: 'dark',
+        supportingPresentation: 'walkthrough',
+        sectionHeightPerStep: 72,
+        supportingIntroduction: {
+          eyebrow: 'The experience in motion',
+          title: 'From content structure to focused exploration',
+          copy:
+            'The Discover page combines multiple paths into the catalog, while maintaining a clear browsing rhythm. The following interactions show how the full page unfolds and how individual content groups respond to controller input.',
+        },
         items: [
           {
-            id: 'discover-browse-experience',
-            label: 'Discover and Browse experience',
+            id: 'discovery-final-visual',
+            label: 'Discover and Explore final experience',
+            aspectRatio: '4680 / 9060',
+            surface: 'transparent',
+            maxWidth: '78%',
+            media: {
+              type: 'image',
+              src: discoveryFinalVisual,
+              alt: 'Nintendo Switch and extended Discover page showing the final discovery experience.',
+              fit: 'contain',
+            },
+          },
+          {
+            id: 'vertical-discovery-scroll',
+            label: 'Vertical discovery scrolling',
+            title: 'A progressive discovery flow',
+            description:
+              'The page gradually shifts from broad inspiration to increasingly relevant content, combining featured games, recommendations based on recent activity and current popularity in one continuous browsing experience.',
             aspectRatio: '16 / 9',
+            theme: 'dark',
+            border: false,
+            surface: 'transparent',
+            media: {
+              webm: verticalScrollingWebm,
+              decorative: true,
+              autoplay: true,
+              loop: true,
+              muted: true,
+              playsInline: true,
+              preload: 'metadata',
+              fit: 'cover',
+            },
           },
           {
-            id: 'editorial-discovery-detail',
-            label: 'Editorial discovery detail',
-            aspectRatio: '4 / 3',
+            id: 'recommended-discovery-scroll',
+            label: 'Recommended content scrolling',
+            title: 'Focused browsing within recommendations',
+            description:
+              'Controller focus moves predictably across the recommendation row, using scale, framing and directional motion to keep the active game clear while revealing the next options.',
+            aspectRatio: '16 / 9',
+            theme: 'dark',
+            border: false,
+            surface: 'transparent',
+            media: {
+              webm: recommendedScrollingWebm,
+              decorative: true,
+              autoplay: true,
+              loop: true,
+              muted: true,
+              playsInline: true,
+              preload: 'metadata',
+              fit: 'cover',
+            },
+          },
+          {
+            id: 'discover-mockup-render',
+            label: 'Discover experience mockup',
+            aspectRatio: '5314 / 2991',
+            surface: 'transparent',
+            maxWidth: '88%',
+            media: {
+              type: 'image',
+              src: discoverMockupRender,
+              alt: 'Final Discover experience presented in a Nintendo Switch mockup.',
+              fit: 'contain',
+            },
           },
         ],
       },
       {
-        id: 'compare-refine',
-        label: 'Compare and refine',
+        id: 'browse-interest',
+        label: 'Browse by interest',
         copy:
-          'Price, discount and refinement tools make intentional browsing faster and easier to scan.',
-        layout: 'asymmetric',
-        items: [
+          'Browse organises the catalog around genres, franchises and curated collections, allowing players to follow their interests without committing to a specific title from the start.',
+        layout: 'device-continuation',
+        compactNarrative: true,
+        rows: [
           {
-            id: 'deals-games-experience',
-            label: 'Deals and All Games experience',
-            aspectRatio: '4 / 3',
+            number: '01',
+            title: 'Categories',
+            description:
+              'Start from familiar genres and gameplay interests to narrow the catalog through a recognisable direction.',
           },
           {
-            id: 'filtering-interaction',
-            label: 'Filtering interaction',
-            aspectRatio: '16 / 10',
+            number: '02',
+            title: 'Collections',
+            description:
+              'Explore franchises, themes and curated selections that connect games beyond traditional genre labels.',
           },
           {
-            id: 'price-refinement-detail',
-            label: 'Price and refinement detail',
-            aspectRatio: '16 / 10',
+            number: '03',
+            title: 'All Games',
+            description:
+              'Open the complete catalog when players need more control over what they explore.',
           },
         ],
+        visual: {
+          composedMedia: {
+            id: 'browse-final-visual',
+            label: 'Browse final experience',
+            aspectRatio: '5584 / 6008',
+            surface: 'transparent',
+            maxWidth: '100%',
+            media: {
+              type: 'image',
+              src: browseFinalVisual,
+              alt: 'Final Browse experience showing the Nintendo Switch interface and extended catalog page.',
+              fit: 'contain',
+            },
+          },
+        },
       },
       {
-        id: 'stay-oriented',
-        label: 'Stay oriented',
+        id: 'deals-savings',
+        label: 'Deals and savings',
         copy:
-          'Persistent navigation and predictable focus feedback help players understand where they are and what will happen next.',
-        layout: 'detail',
-        items: [
+          'Deals brings price, discount and relevance into a clearer hierarchy, helping players compare opportunities without scanning every product individually.',
+        layout: 'comparison',
+        rows: [
           {
-            id: 'navigation-orientation',
-            label: 'Navigation orientation detail',
-            aspectRatio: '16 / 7',
+            number: '01',
+            title: 'Current value',
+            description:
+              'Price, discount and previous cost are grouped together so the value of each offer can be understood at a glance.',
           },
           {
-            id: 'focus-feedback',
-            label: 'Focus feedback detail',
-            aspectRatio: '16 / 10',
+            number: '02',
+            title: 'Relevant opportunities',
+            description:
+              'Offers can be organised around player interests, recent activity and current catalog trends instead of appearing as one undifferentiated list.',
           },
           {
-            id: 'controller-interaction',
-            label: 'Controller interaction detail',
-            aspectRatio: '16 / 10',
+            number: '03',
+            title: 'Faster comparison',
+            description:
+              'Consistent card structure and visible savings make it easier to compare multiple games without opening every product page.',
           },
         ],
+        composedMedia: {
+          id: 'deals-final-visual',
+          label: 'Deals final experience',
+          aspectRatio: '4680 / 5016',
+          surface: 'transparent',
+          media: {
+            type: 'image',
+            src: dealsFinalVisual,
+            alt: 'Final Deals experience showing offer groups, price hierarchy and discount information.',
+            fit: 'contain',
+          },
+        },
+      },
+      {
+        id: 'all-games-outcome',
+        label: 'All Games',
+        copy:
+          'All Games brings the complete catalog into one consistent space, allowing players to browse freely and progressively refine what they see.',
+        layout: 'catalog',
+        visual: {
+          composedMedia: {
+            id: 'all-games-final-visual',
+            label: 'All Games final experience',
+            aspectRatio: '5188 / 5672',
+            surface: 'transparent',
+            maxWidth: '100%',
+            media: {
+              type: 'image',
+              src: allGamesFinalVisual,
+              alt: 'Final All Games experience showing the Nintendo Switch interface and complete catalog.',
+              fit: 'contain',
+            },
+          },
+        },
+        rows: [
+          {
+            number: '01',
+            title: 'Complete catalog',
+            description:
+              'All titles live within one consistent grid, making the breadth of the storefront visible without splitting content across multiple destinations.',
+          },
+          {
+            number: '02',
+            title: 'Progressive refinement',
+            description:
+              'Players can begin with broad exploration and introduce filters only when they need more control.',
+          },
+          {
+            number: '03',
+            title: 'Stable orientation',
+            description:
+              'Navigation, focus and result structure remain consistent while the catalog changes around the selected criteria.',
+          },
+        ],
+        filtering: {
+          label: 'Filtering in context',
+          title: 'Refine without leaving the catalog',
+          copy:
+            'Filtering opens as a temporary layer over the current results, allowing players to adjust criteria while preserving their position and visual context.',
+          media: {
+            id: 'all-games-filtering-animation',
+            label: 'All Games filtering animation',
+            aspectRatio: '16 / 9',
+            theme: 'dark',
+            surface: 'transparent',
+            border: false,
+            media: {
+              webm: activatingFilterWebm,
+              decorative: true,
+              autoplay: true,
+              loop: true,
+              muted: true,
+              playsInline: true,
+              preload: 'metadata',
+              fit: 'cover',
+            },
+          },
+          mediaTitle: 'Applying filters without losing context',
+          mediaDescription:
+            'The filter drawer opens over the current catalog, criteria are applied and the results update while the surrounding page structure remains stable.',
+        },
       },
     ],
     validation: {
       label: 'Validation & next steps',
+      title: 'A coherent direction, ready to be tested',
       introduction:
-        'The concept demonstrates a coherent design direction, but its effectiveness still needs to be validated with players using a real controller.',
+        'The redesign establishes a clearer structural and interaction model, but its effectiveness still needs to be tested with players using a real controller.',
       demonstrated: {
-        title: 'What the current concept demonstrates',
+        label: 'What the concept demonstrates',
         items: [
-          'Clearer structural separation',
-          'Stronger content hierarchy',
-          'Dedicated navigation and refinement layers',
-          'Consistent controller focus states',
+          {
+            number: '01',
+            title: 'Clearer structure',
+            description:
+              'The four destinations have distinct purposes, supported by a stronger hierarchy and more recognisable navigation paths.',
+          },
+          {
+            number: '02',
+            title: 'Predictable controller interaction',
+            description:
+              'Consistent focus states and stable navigation patterns create a clearer relationship between controller input and interface response.',
+          },
+          {
+            number: '03',
+            title: 'Context-preserving refinement',
+            description:
+              'Navigation and filtering operate as dedicated layers, allowing players to refine content without losing their position in the catalog.',
+          },
         ],
       },
       pending: {
-        title: 'What still needs validation',
+        label: 'What needs validation next',
         items: [
-          'Comprehension of the four destinations',
-          'Task-based controller navigation',
-          'Focus predictability',
-          'Filtering behaviour',
-          'Accessibility',
-          'Scalability across storefront regions and device formats',
+          {
+            number: '01',
+            title: 'Do players understand the four destinations?',
+            description:
+              'Test whether Discover, Browse, Deals and All Games communicate sufficiently distinct purposes and whether players choose the expected destination for different goals.',
+          },
+          {
+            number: '02',
+            title: 'Can players navigate predictably with a controller?',
+            description:
+              'Observe task completion, focus movement and navigation errors across key browsing and discovery flows.',
+          },
+          {
+            number: '03',
+            title: 'Does refinement remain usable across different needs?',
+            description:
+              'Evaluate filtering behaviour, accessibility and the system’s ability to scale across content volumes, storefront regions and device formats.',
+          },
         ],
       },
     },
-    closing:
-      'The final result is not only a clearer interface, but a storefront designed around how players actually explore from a console.',
   },
   reflection: {
     id: 'reflection',
-    eyebrow: '06 — REFLECTION',
+    navigationStopId: 'reflection-navigation-stop',
+    eyebrow: '07 — REFLECTION',
     title: 'Designing beyond the interface',
     introduction:
-      'This project taught me that improving an interface often begins by questioning the system behind it. Reorganizing the eShop required me to think beyond individual screens and consider how content, navigation and interaction work together as one experience.',
-    groups: [
+      'This project taught me that improving an interface often begins by questioning the system behind it. Reorganising the eShop required me to think beyond individual screens and consider how content, navigation and interaction work together as one experience.',
+    steps: [
       {
-        title: 'What I learned',
-        description:
-          'Structure and interaction must be designed together rather than treated as separate stages.',
+        id: 'approach',
+        label: 'What changed in my approach',
+        body:
+          'I initially approached the redesign as a set of interface improvements. As the project developed, it became clear that the main problems were structural: destinations overlapped, navigation and filtering competed, and individual screens lacked a shared model. This shifted my attention from redesigning pages to defining how the storefront should behave as a system.',
       },
       {
-        title: 'What I would improve',
-        description:
-          'I would further refine catalog taxonomy, edge cases and accessibility states.',
+        id: 'trade-off',
+        label: 'The main trade-off',
+        body:
+          'The main challenge was balancing variety with clarity. Creating more distinct ways to explore the catalog could easily introduce additional complexity, so every new destination needed a clear purpose and a predictable relationship with the others.',
       },
       {
-        title: 'What I would test next',
-        description:
-          'I would validate the architecture with players and test the complete focus system using a real controller.',
+        id: 'carry-forward',
+        label: "What I’ll carry forward",
+        body:
+          'In future projects, I would define navigation, content structure and interaction rules earlier, before moving into detailed interface design. This would make exploration more focused and help identify system-level problems before they become embedded in individual screens.',
       },
     ],
   },

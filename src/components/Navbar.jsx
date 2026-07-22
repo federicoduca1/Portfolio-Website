@@ -113,6 +113,19 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--visible-site-header-height',
+      isNavbarVisible ? 'var(--site-header-height)' : '0px',
+    );
+
+    return () => {
+      document.documentElement.style.removeProperty(
+        '--visible-site-header-height',
+      );
+    };
+  }, [isNavbarVisible]);
+
   function closeMobileMenu() {
     setIsMobileMenuOpen(false);
   }
@@ -177,7 +190,7 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
-      <div aria-hidden="true" className="h-32" />
+      <div aria-hidden="true" className="h-[6.5rem] sm:h-32" />
     </>
   );
 }

@@ -3,7 +3,10 @@ import MediaPlaceholder from './MediaPlaceholder.jsx';
 
 export default function NextProject({ project }) {
   return (
-    <section className="border-t border-neutral-200 bg-neutral-100">
+    <section
+      id="next-project"
+      className="border-t border-neutral-200 bg-neutral-100"
+    >
       <div className="mx-auto grid max-w-[90rem] gap-10 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-16 lg:px-12 lg:py-28">
         <div>
           <p className="text-sm font-semibold tracking-[0.12em] text-neutral-500 uppercase">

@@ -1,41 +1,50 @@
-function ValidationColumn({ content }) {
+import OutcomeNarrativeRow from './OutcomeNarrativeRow.jsx';
+
+function ValidationRows({ content, prominent = false }) {
   return (
-    <div>
-      <h4 className="max-w-[24ch] text-xl leading-tight font-medium sm:text-2xl">
-        {content.title}
+    <section>
+      <h4 className="text-xs font-semibold tracking-[0.13em] text-neutral-500 uppercase sm:text-sm">
+        {content.label}
       </h4>
-      <ul className="mt-6 border-t border-neutral-300">
+      <div className="mt-5 border-b border-neutral-300">
         {content.items.map((item) => (
-          <li
-            key={item}
-            className="border-b border-neutral-300 py-4 text-base leading-[1.55] text-neutral-700"
-          >
-            {item}
-          </li>
+          <OutcomeNarrativeRow
+            key={item.number}
+            {...item}
+            headingLevel={5}
+            layout="spread"
+            prominent={prominent}
+          />
         ))}
-      </ul>
-    </div>
+      </div>
+    </section>
   );
 }
 
 export default function ValidationSplit({ content }) {
   return (
     <section aria-labelledby="outcome-validation-title">
-      <header className="max-w-[48rem]">
+      <header className="max-w-[52rem]">
+        <p className="text-xs font-semibold tracking-[0.13em] text-[var(--project-accent)] uppercase sm:text-sm">
+          {content.label}
+        </p>
         <h3
           id="outcome-validation-title"
-          className="text-xs font-semibold tracking-[0.13em] text-[var(--project-accent)] uppercase sm:text-sm"
+          className="mt-4 max-w-[18ch] text-[clamp(2.35rem,4.4vw,4.2rem)] leading-[1.08] font-medium text-neutral-950"
         >
-          {content.label}
+          {content.title}
         </h3>
-        <p className="mt-4 text-lg leading-[1.65] text-neutral-700 sm:text-xl">
+        <p className="mt-5 max-w-[46rem] text-lg leading-[1.65] text-neutral-700 sm:text-xl">
           {content.introduction}
         </p>
       </header>
 
-      <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <ValidationColumn content={content.demonstrated} />
-        <ValidationColumn content={content.pending} />
+      <div className="mt-14 sm:mt-16">
+        <ValidationRows content={content.demonstrated} />
+      </div>
+
+      <div className="mt-16 sm:mt-20 lg:mt-24">
+        <ValidationRows content={content.pending} prominent />
       </div>
     </section>
   );

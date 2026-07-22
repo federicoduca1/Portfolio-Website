@@ -1,12 +1,28 @@
 import CaseStudyHeroMedia from './CaseStudyHeroMedia.jsx';
 import MediaPlaceholder from './MediaPlaceholder.jsx';
 
-function HeroMetadata({ project }) {
+function HeroMetadata({ items, project }) {
+  const metadataItems =
+    items ??
+    [
+      { value: project.eyebrow, accent: true },
+      { value: project.year },
+      { value: project.projectType },
+    ];
+
   return (
-    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-semibold tracking-[0.13em] uppercase sm:text-sm">
-      <p className="text-[var(--project-accent)]">{project.eyebrow}</p>
-      <p className="text-neutral-400">{project.year}</p>
-      <p className="text-neutral-400">{project.projectType}</p>
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-semibold tracking-[0.13em] uppercase sm:flex-nowrap sm:text-sm">
+      {metadataItems.map((item) => (
+        <div key={item.value} className="flex shrink-0 items-center">
+          <p
+            className={`whitespace-nowrap ${
+              item.accent ? 'text-[var(--project-accent)]' : 'text-neutral-400'
+            }`}
+          >
+            {item.value}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
@@ -198,7 +214,7 @@ function EditorialHero({ config, project }) {
           </h1>
           {config.showMetadata ? (
             <div className="mt-8 sm:mt-10">
-              <HeroMetadata project={project} />
+              <HeroMetadata items={config.metadata} project={project} />
             </div>
           ) : null}
         </div>
@@ -212,6 +228,11 @@ function EditorialHero({ config, project }) {
           <p className="text-[clamp(1.2rem,1.75vw,1.65rem)] leading-[1.62] text-neutral-700">
             {statement}
           </p>
+          {config.description ? (
+            <p className="mt-6 max-w-[31rem] text-base leading-[1.75] text-neutral-500 sm:text-lg">
+              {config.description}
+            </p>
+          ) : null}
         </div>
       </div>
     </header>

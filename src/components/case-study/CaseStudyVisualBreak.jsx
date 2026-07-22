@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import CaseStudyMediaPlaceholder from './CaseStudyMediaPlaceholder.jsx';
 
 function useReducedMotion() {
   const [reducedMotion, setReducedMotion] = useState(() =>
@@ -130,7 +131,13 @@ function VisualBreakMedia({ containerRef, media, reducedMotion }) {
       <img
         src={media.src}
         alt={media.alt ?? ''}
-        className="absolute inset-0 size-full object-contain"
+        className="absolute inset-0 size-full"
+        style={{
+          objectFit: media.fit ?? 'contain',
+          objectPosition: media.objectPosition ?? 'center',
+          transform: media.scale ? `scale(${media.scale})` : undefined,
+          transformOrigin: media.transformOrigin ?? media.objectPosition,
+        }}
         loading="lazy"
         decoding="async"
       />
@@ -141,24 +148,41 @@ function VisualBreakMedia({ containerRef, media, reducedMotion }) {
 }
 
 export default function CaseStudyVisualBreak({
+  aspectRatio,
   caption,
   children,
   heading,
   headingLines,
+  introduction,
   layout = 'contained',
   media,
   mediaAlignment = 'left',
+  mediaFlushBottom = false,
+  mediaFrame = 'framed',
   mediaWidth = '82%',
+  placeholderLabel,
+  spacing = 'default',
   theme = 'dark',
   variant = media?.type ?? 'custom',
 }) {
   const containerRef = useRef(null);
   const reducedMotion = useReducedMotion();
   const isDark = theme === 'dark';
+  const isCompact = spacing === 'compact';
+  const wideSpacingClass = mediaFlushBottom
+    ? 'pt-12 pb-0 sm:pt-14 lg:pt-16'
+    : isCompact
+      ? 'py-12 sm:py-14 lg:py-16'
+      : 'py-16 sm:py-20 lg:py-24';
+  const containedSpacingClass = mediaFlushBottom
+    ? 'pt-14 pb-0 sm:pt-16 lg:pt-20'
+    : isCompact
+      ? 'py-14 sm:py-16 lg:py-20'
+      : 'py-20 sm:py-24 lg:py-32';
   const containerClass =
     layout === 'wide'
-      ? 'w-full px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24'
-      : 'mx-auto max-w-[90rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-32';
+      ? `w-full px-4 sm:px-6 lg:px-8 ${wideSpacingClass}`
+      : `mx-auto max-w-[90rem] px-5 sm:px-8 lg:px-12 ${containedSpacingClass}`;
   const mediaAlignmentClass =
     mediaAlignment === 'center'
       ? 'mx-auto'
@@ -188,20 +212,37 @@ export default function CaseStudyVisualBreak({
                 ))
               : heading}
           </h2>
+          {introduction ? (
+            <p className="mt-6 max-w-[48rem] text-lg leading-[1.7] text-neutral-300 sm:text-xl">
+              {introduction}
+            </p>
+          ) : null}
 
           <figure className="mt-10 w-full sm:mt-12">
             <div
               ref={containerRef}
-              className="relative overflow-hidden rounded-lg border border-white/10 bg-black"
-              style={{ aspectRatio: media?.aspectRatio ?? '16 / 9' }}
+              className={`relative overflow-hidden ${
+                mediaFrame === 'seamless'
+                  ? 'bg-transparent'
+                  : 'rounded-lg border border-white/10 bg-black'
+              }`}
+              style={{ aspectRatio: aspectRatio ?? media?.aspectRatio ?? '16 / 9' }}
             >
-              {children ?? (
-                <VisualBreakMedia
-                  containerRef={containerRef}
-                  media={media}
-                  reducedMotion={reducedMotion}
-                />
-              )}
+              {children ??
+                (media ? (
+                  <VisualBreakMedia
+                    containerRef={containerRef}
+                    media={media}
+                    reducedMotion={reducedMotion}
+                  />
+                ) : (
+                  <CaseStudyMediaPlaceholder
+                    label={placeholderLabel ?? 'Project visual'}
+                    theme="dark"
+                    fill
+                    embedded
+                  />
+                ))}
             </div>
 
             {caption ? (

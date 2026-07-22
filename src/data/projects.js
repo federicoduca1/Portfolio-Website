@@ -1,3 +1,4 @@
+import { houraProjectConfig } from './houraCaseStudy.js';
 import { nintendoProjectConfig } from './nintendoCaseStudy.js';
 
 export const projects = [
@@ -13,12 +14,13 @@ export const projects = [
     featured: true,
   },
   {
-    id: 'houra',
-    path: '/projects#houra',
-    category: 'Mobile Product',
-    title: 'Houra',
-    description:
-      'Designing a product where time becomes currency.',
+    id: houraProjectConfig.id,
+    slug: houraProjectConfig.slug,
+    path: houraProjectConfig.path,
+    category: houraProjectConfig.category,
+    title: houraProjectConfig.title,
+    year: houraProjectConfig.year,
+    description: houraProjectConfig.statement,
     metadata: 'Community Exchange Platform',
     featured: false,
   },

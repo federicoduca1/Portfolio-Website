@@ -19,6 +19,7 @@ function ChallengeSection({ content }) {
       introduction={content.introduction}
       theme="light"
       width="wide"
+      className="!py-14 sm:!py-16 lg:!py-20"
     >
       <p className="max-w-[52rem] border-l-2 border-[var(--project-accent)] pl-5 text-sm leading-[1.75] text-neutral-600 sm:text-base">
         {content.methodology}
@@ -48,11 +49,6 @@ function ChallengeSection({ content }) {
         />
       </div>
 
-      <div className="mt-16 border-t border-neutral-300 pt-10 sm:mt-20 sm:pt-12">
-        <p className="max-w-[30ch] text-[clamp(1.75rem,3vw,3rem)] leading-[1.18] font-medium text-neutral-950">
-          {content.synthesis}
-        </p>
-      </div>
     </CaseStudySection>
   );
 }
@@ -68,6 +64,7 @@ function ArchitectureSection({ content }) {
       introduction={content.introduction}
       theme="light"
       width="wide"
+      className="!py-14 sm:!py-16 lg:!py-20"
     >
       <DesignPrinciples
         layout="rows"
@@ -142,6 +139,7 @@ function DiscoverySection({ content }) {
       introduction={content.introduction}
       theme="light"
       width="wide"
+      className="!py-14 sm:!py-16 lg:!py-20"
     >
       <ExplorationMarquee {...content.explorations} />
 
@@ -150,7 +148,7 @@ function DiscoverySection({ content }) {
           aria-hidden="true"
           className="block w-0.5 shrink-0 self-stretch rounded-full bg-[var(--project-accent)]"
         />
-        <p className="text-[clamp(1.6rem,3vw,2.75rem)] leading-[1.2] font-medium text-neutral-900 uppercase">
+        <p className="text-[clamp(1.6rem,3vw,2.75rem)] leading-[1.2] font-medium text-neutral-900">
           {content.transition.lines.map((line) => (
             <span key={line} className="block">
               {line}
@@ -180,6 +178,7 @@ function InteractionSection({ content }) {
       introduction={content.introduction}
       theme="light"
       width="wide"
+      className="!py-14 sm:!py-16 lg:!py-20"
       titleClassName="!max-w-[22ch] !text-[clamp(2.5rem,4.4vw,4.25rem)]"
     >
       <div className="space-y-20 sm:space-y-24 lg:space-y-32">
@@ -188,11 +187,6 @@ function InteractionSection({ content }) {
         ))}
       </div>
 
-      <div className="mt-16 border-t border-neutral-300 pt-9 sm:mt-20 sm:pt-10">
-        <p className="max-w-[38rem] text-[clamp(1.5rem,2.6vw,2.35rem)] leading-[1.3] font-medium text-neutral-900">
-          {content.synthesis}
-        </p>
-      </div>
     </CaseStudySection>
   );
 }
@@ -206,9 +200,12 @@ function OutcomeSection({ content }) {
       introduction={content.introduction}
       theme="light"
       width="wide"
+      className="!py-14 sm:!py-16 lg:!py-20"
       titleClassName="!max-w-[20ch] !text-[clamp(2.5rem,4.5vw,4.35rem)]"
     >
-      <OutcomeVisualChapter chapter={content.finalExperience} />
+      <div className="-mt-4 sm:-mt-6">
+        <OutcomeVisualChapter chapter={content.finalExperience} />
+      </div>
 
       <div className="mt-24 space-y-24 sm:mt-28 sm:space-y-28 lg:mt-32 lg:space-y-36">
         {content.visualChapters.map((chapter) => (
@@ -216,14 +213,8 @@ function OutcomeSection({ content }) {
         ))}
       </div>
 
-      <div className="mt-24 border-t border-neutral-300 pt-12 sm:mt-28 sm:pt-14 lg:mt-32 lg:pt-16">
+      <div className="mt-24 pt-12 sm:mt-28 sm:pt-14 lg:mt-32 lg:pt-16">
         <ValidationSplit content={content.validation} />
-      </div>
-
-      <div className="mt-16 border-t border-neutral-300 pt-10 sm:mt-20 sm:pt-12">
-        <p className="max-w-[40rem] text-[clamp(1.6rem,2.8vw,2.6rem)] leading-[1.28] font-medium text-neutral-900">
-          {content.closing}
-        </p>
       </div>
     </CaseStudySection>
   );
@@ -237,7 +228,10 @@ export default function NintendoCaseStudySections({ content }) {
       <DiscoverySection content={content.discovery} />
       <InteractionSection content={content.interaction} />
       <OutcomeSection content={content.outcome} />
-      <CaseStudyReflection content={content.reflection} />
+      <CaseStudyReflection
+        className="!py-14 sm:!py-16 lg:!py-20"
+        content={content.reflection}
+      />
     </>
   );
 }

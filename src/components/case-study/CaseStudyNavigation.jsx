@@ -1,4 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+
+const DESKTOP_NAVIGATION_QUERY = '(min-width: 1180px)';
+
+function useDesktopNavigationMode() {
+  const [isDesktop, setIsDesktop] = useState(() =>
+    typeof window === 'undefined'
+      ? false
+      : window.matchMedia(DESKTOP_NAVIGATION_QUERY).matches,
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(DESKTOP_NAVIGATION_QUERY);
+    const handleChange = (event) => setIsDesktop(event.matches);
+
+    setIsDesktop(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  return isDesktop;
+}
 
 function navigateToSection(event, sectionId, onNavigate) {
   const target = document.getElementById(sectionId);
@@ -67,17 +89,154 @@ function SectionLinks({ activeSectionId, onNavigate, sections }) {
   );
 }
 
-function DesktopNavigation({ activeSectionId, project, sections }) {
+function DesktopNavigation({
+  activeSectionId,
+  project,
+  sections,
+  stickyEndId,
+  stickyStartId,
+  stickyStopId,
+}) {
+  const asideRef = useRef(null);
+  const navRef = useRef(null);
+  const fixedFrameRef = useRef(null);
+  const isBeforeStartRef = useRef(Boolean(stickyStartId));
+  const isEndHiddenRef = useRef(false);
+  const [fixedFrame, setFixedFrame] = useState(null);
+  const [isBeforeStart, setIsBeforeStart] = useState(Boolean(stickyStartId));
+  const [isEndHidden, setIsEndHidden] = useState(false);
   const activeIndex = Math.max(
     sections.findIndex((section) => section.id === activeSectionId),
     0,
   );
 
+  useLayoutEffect(() => {
+    if (!stickyStartId && !stickyStopId) {
+      fixedFrameRef.current = null;
+      isBeforeStartRef.current = false;
+      isEndHiddenRef.current = false;
+      setFixedFrame(null);
+      setIsBeforeStart(false);
+      setIsEndHidden(false);
+      return undefined;
+    }
+
+    const aside = asideRef.current;
+    const nav = navRef.current;
+    const startSection = stickyStartId
+      ? document.getElementById(stickyStartId)
+      : null;
+    const stopSection = stickyStopId
+      ? document.getElementById(stickyStopId)
+      : null;
+    const endSection = stickyEndId
+      ? document.getElementById(stickyEndId)
+      : null;
+    if (!aside || !nav || (stickyStopId && !stopSection)) return undefined;
+
+    const stickyOffset = Number.parseFloat(getComputedStyle(nav).top) || 0;
+    let frameId = 0;
+
+    const update = () => {
+      frameId = 0;
+
+      const beforeStart = startSection
+        ? startSection.getBoundingClientRect().top > stickyOffset
+        : false;
+
+      if (beforeStart !== isBeforeStartRef.current) {
+        isBeforeStartRef.current = beforeStart;
+        setIsBeforeStart(beforeStart);
+      }
+
+      if (beforeStart) {
+        if (fixedFrameRef.current !== null) {
+          fixedFrameRef.current = null;
+          setFixedFrame(null);
+        }
+        if (isEndHiddenRef.current) {
+          isEndHiddenRef.current = false;
+          setIsEndHidden(false);
+        }
+        return;
+      }
+
+      const asideBounds = aside.getBoundingClientRect();
+      const shouldStop = stopSection
+        ? stopSection.getBoundingClientRect().top <= stickyOffset
+        : false;
+
+      if (shouldStop) {
+        const nextFrame = {
+          top: stickyOffset,
+          left: asideBounds.left,
+          width: asideBounds.width,
+        };
+        const currentFrame = fixedFrameRef.current;
+
+        if (
+          currentFrame === null ||
+          Math.abs(currentFrame.left - nextFrame.left) > 0.5 ||
+          Math.abs(currentFrame.width - nextFrame.width) > 0.5
+        ) {
+          fixedFrameRef.current = nextFrame;
+          setFixedFrame(nextFrame);
+        }
+
+        const shouldHide = endSection
+          ? endSection.getBoundingClientRect().top <=
+            stickyOffset + nav.offsetHeight + 24
+          : false;
+
+        if (shouldHide !== isEndHiddenRef.current) {
+          isEndHiddenRef.current = shouldHide;
+          setIsEndHidden(shouldHide);
+        }
+      } else {
+        if (fixedFrameRef.current !== null) {
+          fixedFrameRef.current = null;
+          setFixedFrame(null);
+        }
+        if (isEndHiddenRef.current) {
+          isEndHiddenRef.current = false;
+          setIsEndHidden(false);
+        }
+      }
+    };
+
+    const requestUpdate = () => {
+      if (!frameId) frameId = window.requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    update();
+
+    return () => {
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
+  }, [stickyEndId, stickyStartId, stickyStopId]);
+
   return (
-    <aside className="hidden min-[1180px]:block min-[1180px]:pt-[clamp(6rem,10vw,10rem)]">
+    <aside
+      ref={asideRef}
+      className="relative hidden min-[1180px]:block min-[1180px]:pt-20"
+    >
       <nav
+        ref={navRef}
         aria-label={`${project.shortTitle} case study sections`}
-        className="sticky top-[calc(var(--site-header-height)+1.5rem)] py-2"
+        className={`py-2 ${
+          fixedFrame === null
+            ? 'sticky top-[calc(var(--site-header-height)+1.5rem)]'
+            : 'fixed z-20'
+        } ${
+          isBeforeStart || isEndHidden
+            ? 'invisible opacity-0'
+            : 'visible opacity-100'
+        }`}
+        style={fixedFrame ?? undefined}
       >
         <p className="text-xs font-semibold tracking-[0.13em] text-neutral-400 uppercase">
           Case study
@@ -158,7 +317,7 @@ function CompactNavigation({ activeSectionId, project, sections }) {
     <nav
       ref={containerRef}
       aria-label={`${project.shortTitle} compact case study navigation`}
-      className="sticky top-[var(--site-header-height)] z-30 border-y border-neutral-200 bg-neutral-50/95 backdrop-blur-sm min-[1180px]:hidden"
+      className="sticky top-[var(--visible-site-header-height)] z-30 border-y border-neutral-200 bg-neutral-50/95 backdrop-blur-sm transition-[top] duration-300 ease-out min-[1180px]:hidden"
     >
       <div className="relative">
         <div className="flex min-h-12 items-center gap-4 px-4 sm:px-5">
@@ -214,10 +373,11 @@ function CompactNavigation({ activeSectionId, project, sections }) {
 }
 
 export default function CaseStudyNavigation(props) {
-  return (
-    <>
-      <DesktopNavigation {...props} />
-      <CompactNavigation {...props} />
-    </>
+  const isDesktop = useDesktopNavigationMode();
+
+  return isDesktop ? (
+    <DesktopNavigation {...props} />
+  ) : (
+    <CompactNavigation {...props} />
   );
 }
