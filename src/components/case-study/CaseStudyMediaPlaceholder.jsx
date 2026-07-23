@@ -16,12 +16,14 @@ const themeClasses = {
   light: 'border-neutral-300 bg-neutral-200 text-neutral-600',
   soft: 'border-neutral-300/80 bg-neutral-200/75 text-neutral-600',
   dark: 'border-white/10 bg-white/8 text-neutral-300',
+  bare: 'border-transparent bg-transparent text-neutral-600',
 };
 
 export default function CaseStudyMediaPlaceholder({
   alt = '',
   aspectRatio,
   autoPlay = true,
+  blendMode = 'normal',
   caption,
   className = '',
   decorative = true,
@@ -32,6 +34,7 @@ export default function CaseStudyMediaPlaceholder({
   muted = true,
   objectFit = 'contain',
   objectPosition = 'center',
+  mediaScale = 1,
   orientation = 'landscape',
   playsInline = true,
   poster,
@@ -104,7 +107,12 @@ export default function CaseStudyMediaPlaceholder({
             loading="lazy"
             decoding="async"
             className="size-full"
-            style={{ objectFit, objectPosition }}
+            style={{
+              mixBlendMode: blendMode,
+              objectFit,
+              objectPosition,
+              transform: `scale(${mediaScale})`,
+            }}
           />
         ) : null}
 
@@ -119,7 +127,12 @@ export default function CaseStudyMediaPlaceholder({
             poster={poster}
             preload={preload}
             className="size-full motion-reduce:hidden"
-            style={{ objectFit, objectPosition }}
+            style={{
+              mixBlendMode: blendMode,
+              objectFit,
+              objectPosition,
+              transform: `scale(${mediaScale})`,
+            }}
           >
             {videoSources.map((source) => (
               <source key={source.src} src={source.src} type={source.type} />

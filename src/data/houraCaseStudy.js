@@ -1,5 +1,18 @@
 import houraHeroVisual from '../assets/projects/houra/hero/hero-visual.png';
 import houraVisualBreak from '../assets/projects/houra/hero/visualbreak-visual.png';
+import timeEconomyDiagram from '../assets/projects/houra/case study /time-economy/time-economy-diagram.png';
+import timeCreditProfileVisual from '../assets/projects/houra/case study /time-economy/user-timecredits-profile.png';
+import createRequestAnimation1 from '../assets/projects/houra/case study /exchange-journey/create-a-request-animation1.webm';
+import createRequestAnimation2 from '../assets/projects/houra/case study /exchange-journey/create-a-request-animation2.webm';
+import createRequestAnimation3 from '../assets/projects/houra/case study /exchange-journey/create-a-request-animation3.webm';
+import findRequestUxFlow from '../assets/projects/houra/case study /exchange-journey/find-a-request-uxflow.png';
+import manageRequestVisual from '../assets/projects/houra/case study /exchange-journey/manage-a-request.png';
+import proposeHelpAnimation from '../assets/projects/houra/case study /exchange-journey/propose-a-help-animation.webm';
+import searchRequestAnimation from '../assets/projects/houra/case study /exchange-journey/search-a-request-animation.webm';
+import selectHelperUxFlow from '../assets/projects/houra/case study /exchange-journey/select-a-helper-uxflow.png';
+import twoJourneyDiagram from '../assets/projects/houra/case study /exchange-journey/two-journey-diagram.png';
+import helpingVerticalScrollingAnimation from '../assets/projects/houra/case study /participation/helping-verticalscrolling-animation.webm';
+import gettingHelpVerticalScrollingAnimation from '../assets/projects/houra/case study /participation/gettinghelp-verticalscrolling-animation.webm';
 
 export const houraProjectConfig = {
   id: 'houra',
@@ -42,11 +55,10 @@ export const houraProjectConfig = {
   navigation: [
     { id: 'overview', label: 'Overview' },
     { id: 'challenge', label: 'Challenge' },
-    { id: 'participation', label: 'Participation' },
     { id: 'time-economy', label: 'Time Economy' },
-    { id: 'trust', label: 'Trust' },
+    { id: 'participation', label: 'Participation' },
     { id: 'exchange-journey', label: 'Exchange Journey' },
-    { id: 'system-synthesis', label: 'System Synthesis' },
+    { id: 'trust', label: 'Trust' },
     { id: 'validation', label: 'Validation' },
     { id: 'reflection', label: 'Reflection' },
   ],
@@ -148,6 +160,26 @@ export const houraCaseStudyContent = {
     title: 'Exchanging skills is not just a matching problem',
     introduction:
       'A time-banking service must do more than connect supply and demand. It needs to make value understandable, participation flexible and real-world exchanges trustworthy without relying on money or fixed provider roles.',
+    participationContextsEyebrow: 'Three participation contexts',
+    participationContextsIntroduction:
+      'Different motivations can bring people into the same exchange system, from needing practical support to looking for a meaningful way to contribute.',
+    participationContexts: [
+      {
+        title: 'New to the community',
+        description:
+          'Needs practical support and a way to build local connections in an unfamiliar place.',
+      },
+      {
+        title: 'Ready to contribute',
+        description:
+          'Wants to use available time and personal skills to support the surrounding community.',
+      },
+      {
+        title: 'Looking for support',
+        description:
+          'Needs access to knowledge or practical help without depending entirely on money.',
+      },
+    ],
     howMightWe:
       'How might we create a system where people can easily exchange skills and time while ensuring fairness, trust and flexibility?',
     tensionsEyebrow: 'Four system tensions',
@@ -176,233 +208,395 @@ export const houraCaseStudyContent = {
       },
     ],
   },
-  participation: {
-    id: 'participation',
-    eyebrow: '03 — PARTICIPATION',
-    title: 'Designing participation without fixed roles',
-    introduction:
-      'Houra treats helping and receiving as two states of the same community experience. Users can move between both roles over time without creating separate identities or entering different product journeys.',
-    behaviours: [
-      {
-        label: 'GIVING HELP',
-        description:
-          'Contribute time, respond to requests and earn credits.',
-      },
-      {
-        label: 'RECEIVING HELP',
-        description:
-          'Create requests, coordinate support and spend credits.',
-      },
-    ],
-    statesMedia: {
-      label: 'Helping and receiving states',
-      aspectRatio: '4 / 3',
-    },
-    requests: {
-      title: 'Requests guide participation',
-      description:
-        'Instead of depending only on users publishing generic skill listings, Houra surfaces real community needs and allows people to offer help where it is already relevant.',
-      media: {
-        label: 'Community request discovery',
-        aspectRatio: '16 / 10',
-      },
-    },
-    discovery: {
-      title: 'Helping can begin through exploration',
-      description:
-        'Users may enter the app without knowing exactly how they want to contribute, so the homepage supports browsing by requests, categories and nearby opportunities.',
-      media: {
-        label: 'Exploratory homepage flow',
-        aspectRatio: '16 / 8',
-      },
-    },
-  },
   timeEconomy: {
     id: 'time-economy',
-    eyebrow: '04 — TIME ECONOMY',
+    eyebrow: '03 — TIME ECONOMY',
     title: 'One hour as a shared unit of value',
     introduction:
-      'Houra uses time as a common unit across every exchange. Helping another member for one hour generates one time credit, which can later be spent with any other participant in the network.',
+      'Houra replaces monetary pricing with a shared time credit. Each hour spent helping another member generates one credit that can later be used to receive an hour of support from anyone else in the community.',
     equation: ['1 hour given', '1 time credit earned', '1 hour available to receive'],
     media: {
-      label: 'Time-credit circulation model',
-      aspectRatio: '16 / 8',
+      label: 'Community time-credit circulation',
+      src: timeEconomyDiagram,
+      alt: 'Diagram showing an Houra member earning a time credit by helping one person and later using it to receive help from another member.',
+      aspectRatio: '1448 / 1086',
+      decorative: false,
+      embedded: true,
+      objectFit: 'contain',
+      theme: 'bare',
+      width: 'compact',
     },
     principles: [
       {
-        title: 'Equal time value',
+        title: 'Equal unit',
         description:
           'Every hour follows the same basic unit, keeping the system understandable and avoiding complex price lists.',
       },
       {
         title: 'Indirect reciprocity',
         description:
-          'Members do not need to repay the person who helped them; value can move across the entire community.',
+          'The person who receives help does not need to repay the same member; value can circulate across the wider community.',
       },
       {
-        title: 'Visible balance',
+        title: 'Visible circulation',
         description:
-          'The interface makes earned credits, available balance and completed exchanges visible throughout the service.',
+          'Credits earned, available balance and completed exchanges remain visible through the product experience.',
       },
     ],
+    productEyebrow: 'Product expression',
+    productMedia: {
+      label: 'Time-credit product interface',
+      src: timeCreditProfileVisual,
+      alt: 'Houra member profile showing the available time-credit balance and recent exchange activity.',
+      aspectRatio: '1464 / 2960',
+      decorative: false,
+      embedded: true,
+      objectFit: 'contain',
+      theme: 'bare',
+    },
     questions: [
       'Should every type of work have equal time value?',
       'When should a time credit be transferred?',
       'How should cancellations or incomplete exchanges be handled?',
-      'Can users receive help before earning their first credit?',
+      'Can members receive help before earning their first credit?',
     ],
   },
-  trust: {
-    id: 'trust',
-    eyebrow: '05 — TRUST',
-    title: 'Building trust before people meet',
+  participation: {
+    id: 'participation',
+    eyebrow: '04 — PARTICIPATION',
+    title: 'Designing participation without fixed roles',
     introduction:
-      'Because exchanges involve personal time and real-world interaction, trust cannot depend on a single rating. It needs to be built progressively through identity, capability, communication and accountability.',
-    steps: [
+      'Houra treats helping and receiving as two states of the same community experience. Users can move between both roles over time without creating separate identities or entering different product journeys.',
+    modesEyebrow: 'One identity, two modes of participation',
+    modesIntroduction:
+      'The platform integrates both sides of participation into one shared space (My activity), allowing users to manage the help they offer and the support they receive without switching accounts or entering separate journeys.',
+    modes: [
       {
-        title: 'Identity',
+        id: 'helping-state',
+        label: 'Helping state',
+        title: 'Managing the help you provide',
         description:
-          'Profiles make people, location and participation history visible before an exchange begins.',
-        mediaLabel: 'Identity and profile',
+          'The Helping view collects the requests a user has responded to and the activities they are supporting, making upcoming commitments, conversations and completed contributions easy to follow from one place.',
+        media: {
+          label: 'Helping state interface',
+          aspectRatio: '9 / 14',
+          decorative: true,
+          embedded: true,
+          theme: 'bare',
+          videoSources: [
+            {
+              src: helpingVerticalScrollingAnimation,
+              type: 'video/webm',
+            },
+          ],
+        },
       },
       {
-        title: 'Capability',
+        id: 'getting-help-state',
+        label: 'Getting Help state',
+        title: 'Keeping track of the support you request',
         description:
-          'Skills, experience and previous feedback help users evaluate whether someone is suitable for a specific request.',
-        mediaLabel: 'Skills and feedback',
-      },
-      {
-        title: 'Communication',
-        description:
-          'Chat allows participants to clarify expectations, location, timing and practical details before committing.',
-        mediaLabel: 'Pre-exchange conversation',
-      },
-      {
-        title: 'Accountability',
-        description:
-          'Completed activities, mutual confirmation and feedback create a visible history of participation.',
-        mediaLabel: 'Completion and review',
+          'The Getting Help view gathers the requests created by the same user and their current status, providing a clear overview of available helpers, ongoing coordination and completed support.',
+        media: {
+          label: 'Getting Help state interface',
+          aspectRatio: '9 / 14',
+          decorative: true,
+          embedded: true,
+          theme: 'bare',
+          videoSources: [
+            {
+              src: gettingHelpVerticalScrollingAnimation,
+              type: 'video/webm',
+            },
+          ],
+        },
       },
     ],
+    closing:
+      'By keeping both roles visible within the same account, Houra frames participation as fluid and reciprocal rather than transactional.',
   },
   exchangeJourney: {
     id: 'exchange-journey',
-    eyebrow: '06 — EXCHANGE JOURNEY',
-    title: 'From a request to a completed exchange',
+    eyebrow: '05 — EXCHANGE JOURNEY',
+    title: 'Two roles, one shared exchange',
     introduction:
-      'The service connects discovery, coordination and closure into one continuous cycle rather than treating each screen as an isolated task.',
-    phases: [
-      {
-        title: 'Find a way to contribute',
-        description:
-          'Users explore community requests, evaluate the person and context, then offer help directly or begin a conversation.',
-        media: [
-          { label: 'Contribution flow', aspectRatio: '16 / 7' },
-          { label: 'Request discovery wireframes', aspectRatio: '4 / 3' },
-          { label: 'Offer-help interface', aspectRatio: '4 / 3' },
-        ],
-      },
-      {
-        title: 'Agree on the exchange',
-        description:
-          'Participants use chat and flexible scheduling to align expectations without turning voluntary help into a rigid booking process.',
-        media: [
-          { label: 'Coordination flow', aspectRatio: '16 / 8' },
-          { label: 'Chat and scheduling interface', aspectRatio: '16 / 8' },
-        ],
-      },
-      {
-        title: 'Close the loop',
-        description:
-          'After the activity, completion, time-credit transfer and mutual feedback return value and trust to the wider community.',
-        media: [
-          { label: 'Exchange completion flow', aspectRatio: '16 / 8' },
-          { label: 'Credit and feedback interface', aspectRatio: '16 / 8' },
-        ],
-      },
-    ],
-  },
-  systemSynthesis: {
-    id: 'system-synthesis',
-    eyebrow: '07 — SYSTEM SYNTHESIS',
-    title: 'A service model translated into one connected experience',
-    introduction:
-      'The final concept brings participation, discovery, trust, coordination and time-credit circulation into one continuous service journey.',
-    media: {
-      label: 'Houra system synthesis',
-      aspectRatio: '16 / 8',
+      'Every exchange begins from two different intentions. One member expresses a need through a request, while another explores real community needs and chooses where to contribute. Their paths converge when an offer is accepted and coordination begins.',
+    overviewEyebrow: 'How the two journeys connect',
+    overviewMedia: {
+      label: 'Receiver and helper journey overview',
+      src: twoJourneyDiagram,
+      alt: 'Diagram showing how Houra receiver and helper journeys converge into one coordinated exchange.',
+      aspectRatio: '1672 / 941',
+      decorative: false,
+      embedded: true,
+      objectFit: 'contain',
+      theme: 'bare',
     },
-    outcomes: [
+    receiver: {
+      label: 'Receiver journey',
+      title: 'From expressing a need to receiving support',
+      introduction:
+        'The receiver journey begins by turning a personal need into a visible community request, then moves into evaluating available helpers and coordinating the exchange.',
+      phases: [
+        {
+          title: 'Express the need',
+          introEyebrow: 'From need to actionable request',
+          description:
+            'Before anyone can offer help, the receiver needs to turn a personal need into enough shared context for the community to understand what is being asked and decide whether to contribute.',
+          guidedSteps: [
+            {
+              id: 'express-need-step-01',
+              label: 'Describe',
+              title: 'Define what support is needed',
+              description:
+                'The request starts by describing the need itself: its purpose, category and language, with optional required skills when specific expertise is necessary.',
+              media: {
+                label: 'Express the need interface — step 01',
+                aspectRatio: '9 / 14',
+                blendMode: 'multiply',
+                embedded: true,
+                mediaScale: 1.025,
+                theme: 'bare',
+                videoSources: [
+                  {
+                    src: createRequestAnimation1,
+                    type: 'video/webm',
+                  },
+                ],
+              },
+            },
+            {
+              id: 'express-need-step-02',
+              label: 'Set',
+              title: 'Define when and where it happens',
+              description:
+                'Location, date and expected duration turn the request into a concrete activity, giving potential helpers the context they need before offering their time.',
+              media: {
+                label: 'Express the need interface — step 02',
+                aspectRatio: '9 / 14',
+                blendMode: 'multiply',
+                embedded: true,
+                theme: 'bare',
+                videoSources: [
+                  {
+                    src: createRequestAnimation2,
+                    type: 'video/webm',
+                  },
+                ],
+              },
+            },
+            {
+              id: 'express-need-step-03',
+              label: 'Review & Submit',
+              title: 'Review before sharing with the community',
+              description:
+                'Before publishing, the receiver can review the complete request, check both the activity details and practical information, and make adjustments before making it visible to potential helpers.',
+              media: {
+                label: 'Express the need interface — step 03',
+                aspectRatio: '9 / 14',
+                blendMode: 'multiply',
+                embedded: true,
+                theme: 'bare',
+                videoSources: [
+                  {
+                    src: createRequestAnimation3,
+                    type: 'video/webm',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+        {
+          title: 'Choose and coordinate',
+          introEyebrow: 'Choose and coordinate',
+          description:
+            'Once helpers respond, the receiver can compare them, open profiles, start conversations, select one person and propose a day and time for the activity.',
+          flowLayout: 'split',
+          flow: {
+            label: 'Helper-selection and coordination UX flow',
+            src: selectHelperUxFlow,
+            alt: 'UX flow showing how an Houra receiver reviews available helpers, selects one and coordinates the exchange.',
+            aspectRatio: '4566 / 2634',
+            decorative: false,
+            embedded: true,
+            objectFit: 'contain',
+            theme: 'bare',
+          },
+          media: [
+            {
+              label: 'Manage a request',
+              src: manageRequestVisual,
+              alt: 'Houra request management screens showing helper selection, conversation and scheduling.',
+              aspectRatio: '5264 / 2700',
+              decorative: false,
+              embedded: true,
+              objectFit: 'contain',
+              theme: 'bare',
+            },
+          ],
+          layout: 'full',
+        },
+      ],
+    },
+    helper: {
+      label: 'Helper journey',
+      title: 'From discovering a real need to offering help',
+      introduction:
+        'Helpers do not publish generic service listings. They explore needs already expressed by the community and activate their availability only when a specific request matches their skills and willingness to contribute.',
+      phases: [
+        {
+          title: 'Discover a relevant request',
+          introEyebrow: 'Discover a relevant request',
+          description:
+            'Members browse existing requests, categories or nearby needs, then open a specific request to understand its context and decide whether they can contribute.',
+          flow: {
+            label: 'Request-discovery UX flow',
+            src: findRequestUxFlow,
+            alt: 'UX flow showing how an Houra member explores community requests and opens a relevant request.',
+            aspectRatio: '4842 / 2078',
+            decorative: false,
+            embedded: true,
+            objectFit: 'contain',
+            theme: 'bare',
+          },
+          guidedVariant: 'compact',
+          guidedSteps: [
+            {
+              id: 'helper-search-request',
+              label: 'Search',
+              title: 'Find a request that matches',
+              description:
+                'Members explore real community needs, open a relevant request and evaluate whether its context matches their skills, availability and willingness to contribute.',
+              media: {
+                label: 'Search a request animation',
+                aspectRatio: '9 / 14',
+                embedded: true,
+                theme: 'bare',
+                videoSources: [
+                  {
+                    src: searchRequestAnimation,
+                    type: 'video/webm',
+                  },
+                ],
+              },
+            },
+            {
+              id: 'helper-propose-help',
+              label: 'Offer',
+              title: 'Propose help for a specific need',
+              description:
+                'After deciding to contribute, the helper sends an offer tied to that request and enters the shared coordination flow with clear context already established.',
+              media: {
+                label: 'Propose help animation',
+                aspectRatio: '9 / 14',
+                embedded: true,
+                theme: 'bare',
+                videoSources: [
+                  {
+                    src: proposeHelpAnimation,
+                    type: 'video/webm',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+  trust: {
+    id: 'trust',
+    eyebrow: '06 — TRUST',
+    title: 'Building trust across the exchange',
+    introduction:
+      'Trust is not created by one feature. It develops across the journey through visible identity, clearer expectations, direct communication and an accountable history of participation.',
+    steps: [
       {
-        title: 'Fluid participation',
+        label: 'Before offering or selecting',
+        title: 'Understand who is behind the exchange',
         description:
-          'Users can move between giving and receiving without fixed roles.',
+          'Before committing to an exchange, members can review identity, skills, location, previous activity and feedback to build a clearer picture of the person they may interact with.',
+        media: {
+          label: 'Profile and reviews prototype',
+          aspectRatio: '16 / 9',
+        },
+        caption:
+          'Profile information and previous feedback make reputation visible before the first interaction.',
       },
       {
-        title: 'Time-based value',
+        label: 'Before meeting',
+        title: 'Reduce uncertainty through conversation',
         description:
-          'A shared credit system separates contribution from direct repayment.',
-      },
-      {
-        title: 'Trust across the exchange',
-        description:
-          'Profiles, communication, confirmation and feedback support confidence from discovery to completion.',
+          'Chat gives both members a private space to clarify the request, align expectations and agree on practical details before meeting in person.',
+        media: [
+          {
+            label: 'Pre-exchange conversation',
+            aspectRatio: '4 / 5',
+          },
+          {
+            label: 'Scheduling agreement',
+            aspectRatio: '3 / 4',
+          },
+        ],
+        notes: [
+          'Clarify the request',
+          'Align expectations',
+          'Agree on timing and practical details',
+        ],
       },
     ],
   },
   validation: {
     id: 'validation',
-    eyebrow: '08 — VALIDATION',
+    eyebrow: '07 — VALIDATION',
     title: 'Testing whether the service model works in practice',
     introduction:
-      'The concept defines a coherent exchange system, but its social and economic assumptions still need to be validated with real participants and real community dynamics.',
-    demonstrates: [
+      'The concept defines a coherent exchange system, but its social, economic and behavioural assumptions still need to be tested with real participants and real community dynamics.',
+    areas: [
       {
-        title: 'Understandable exchange model',
+        label: 'Comprehension',
+        title: 'Do members understand the exchange model?',
         description:
-          'The service connects giving, receiving and time-credit balance within one visible system.',
+          'Test whether people understand the helper and receiver roles, indirect reciprocity and how time credits are earned and spent.',
       },
       {
-        title: 'Flexible participation',
+        label: 'Behaviour and fairness',
+        title: 'Does the model encourage balanced and fair participation?',
         description:
-          'Users can contribute, request support and coordinate activities without fixed provider or customer roles.',
+          'Evaluate whether members respond to real requests, whether equal time value feels acceptable across different skills and whether contribution and demand remain balanced.',
       },
       {
-        title: 'Progressive trust',
+        label: 'Trust and coordination',
+        title: 'Do members feel confident enough to continue the exchange?',
         description:
-          'Identity, communication and participation history support confidence across the exchange journey.',
+          'Assess whether profiles, reviews, chat and scheduling provide sufficient confidence before an in-person activity.',
       },
-    ],
-    questions: [
-      'Do users understand how time credits are earned and spent?',
-      'Does equal time value feel fair across different skills and levels of effort?',
-      'Are the available trust signals sufficient before a real-world meeting?',
-      'Can the community maintain a healthy balance between requests and available help?',
     ],
     methods:
       'Suggested methods: concept testing, moderated task-based prototype sessions, service walkthroughs, diary studies and small community pilots.',
   },
   reflection: {
     id: 'reflection',
-    eyebrow: '09 — REFLECTION',
+    eyebrow: '08 — REFLECTION',
     title: 'Designing the rules behind the experience',
     introduction:
       'Houra pushed the project beyond interface design. The most important decisions concerned value, incentives, participation and trust: rules that shape behaviour even when they are not directly visible on screen.',
     blocks: [
       {
-        title: 'From interface to service',
+        title: 'Designing behaviour, not only flows',
         description:
-          'The project required me to consider what happens before, during and after each interaction, including the rules connecting separate users and separate moments in time.',
+          'The project required me to consider how economic and social rules influence what people are willing to offer, request and exchange.',
       },
       {
-        title: 'Simplicity versus fairness',
+        title: 'Simplicity creates trade-offs',
         description:
-          'Treating every hour equally makes the system understandable, but real exchanges introduce differences in effort, preparation and perceived expertise that would need deeper validation.',
+          'Using one hour as a shared unit makes the service understandable, but it also introduces questions around effort, preparation and perceived expertise.',
       },
       {
-        title: 'What I would carry forward',
+        title: 'Service decisions surface in the interface',
         description:
-          'In future marketplace and community products, I would define incentives, failure cases and trust mechanisms alongside the core user journey rather than treating them as secondary features.',
+          'My Activity, request-led participation, profile signals, chat and scheduling are not isolated features. They are product expressions of the wider service model.',
       },
     ],
     closing:

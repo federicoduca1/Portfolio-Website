@@ -18,6 +18,7 @@ export default function CaseStudySection({
   theme = 'light',
   width = 'content',
   className = '',
+  contentClassName = '',
   titleClassName = '',
   children,
 }) {
@@ -54,7 +55,9 @@ export default function CaseStudySection({
         ) : null}
       </div>
 
-      <div className={`mt-12 sm:mt-16 ${widthClass}`}>{children}</div>
+      <div className={`mt-12 sm:mt-16 ${widthClass} ${contentClassName}`}>
+        {children}
+      </div>
     </section>
   );
 }
