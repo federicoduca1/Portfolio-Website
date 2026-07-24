@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import ProjectPreviewMedia from '../projects/ProjectPreviewMedia.jsx';
 import MediaPlaceholder from './MediaPlaceholder.jsx';
 
 export default function NextProject({ project }) {
@@ -37,13 +38,17 @@ export default function NextProject({ project }) {
         <Link
           to={project.path}
           aria-label={`View ${project.title} project`}
-          className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-focus-ring"
+          className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-focus-ring"
         >
-          <MediaPlaceholder
-            label={project.mediaLabel}
-            aspect="landscape"
-            tone="light"
-          />
+          {project.media ? (
+            <ProjectPreviewMedia project={project} />
+          ) : (
+            <MediaPlaceholder
+              label={project.mediaLabel}
+              aspect="landscape"
+              tone="light"
+            />
+          )}
         </Link>
       </div>
     </section>

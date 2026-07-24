@@ -82,6 +82,7 @@ export const houraCaseStudyContent = {
     theme: 'soft',
     src: houraHeroVisual,
     alt: 'Two mobile devices showing the Houra activity and helper-selection experiences.',
+    backgroundColor: '#205B69',
     objectFit: 'contain',
     objectPosition: 'center',
     decorative: false,

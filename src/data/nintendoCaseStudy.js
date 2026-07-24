@@ -31,6 +31,8 @@ import heroVisualImage from '../assets/projects/nintendo-eshop-redesign/hero/her
 import heroScrollingMp4 from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling.mp4';
 import heroScrollingPoster from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling-poster.webp';
 import heroScrollingWebm from '../assets/projects/nintendo-eshop-redesign/hero/hero-scrolling.webm';
+import houraPhoneVisualOne from '../assets/card-visual/houra-project/phone-visual-1.png';
+import houraPhoneVisualTwo from '../assets/card-visual/houra-project/phone-visual-2.png';
 
 export const nintendoProjectConfig = {
   id: 'nintendo-eshop-redesign',
@@ -75,8 +77,19 @@ export const nintendoProjectConfig = {
     title: 'Houra',
     statement: 'Designing a product where time becomes currency.',
     metadata: 'Mobile Product · Community Exchange Platform',
-    path: '/projects#houra',
+    path: '/projects/houra',
     mediaLabel: 'Houra project cover',
+    media: {
+      type: 'image',
+      src: houraPhoneVisualOne,
+      width: 3430,
+      height: 4965,
+      secondarySrc: houraPhoneVisualTwo,
+      secondaryWidth: 3392,
+      secondaryHeight: 4685,
+      alt: 'Two mobile devices showing the Houra activity and helper-selection experiences.',
+      presentation: 'houra-phones',
+    },
   },
 };
 
@@ -90,6 +103,7 @@ export const nintendoCaseStudyContent = {
       type: 'image',
       src: heroVisualImage,
       alt: 'Nintendo Switch displaying the redesigned Nintendo eShop storefront.',
+      backgroundColor: '#E84A3C',
       fit: 'contain',
       focalPosition: 'center bottom',
       breakout: 'top',

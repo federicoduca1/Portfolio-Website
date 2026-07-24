@@ -23,6 +23,7 @@ export default function CaseStudyMediaPlaceholder({
   alt = '',
   aspectRatio,
   autoPlay = true,
+  backgroundColor,
   blendMode = 'normal',
   caption,
   className = '',
@@ -57,6 +58,7 @@ export default function CaseStudyMediaPlaceholder({
           <div
             aria-hidden="true"
             className="absolute inset-x-0 top-[22%] bottom-0 rounded-2xl border border-neutral-300/80 bg-neutral-200/75 sm:top-[18%] lg:rounded-3xl"
+            style={backgroundColor ? { backgroundColor } : undefined}
           />
           <img
             src={src}

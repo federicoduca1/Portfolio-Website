@@ -93,6 +93,11 @@ export default function MediaPlaceholder({
             role={mediaContent ? undefined : 'img'}
             aria-label={mediaContent ? undefined : label}
             className={`case-study-media case-study-media--${tone} case-study-media__hero-panel absolute inset-0 overflow-hidden`}
+            style={
+              media?.backgroundColor
+                ? { backgroundColor: media.backgroundColor }
+                : undefined
+            }
           >
             {!isTopBreakout ? mediaContent : null}
             {!mediaContent ? (
