@@ -11,6 +11,8 @@ import proposeHelpAnimation from '../assets/projects/houra/case study /exchange-
 import searchRequestAnimation from '../assets/projects/houra/case study /exchange-journey/search-a-request-animation.webm';
 import selectHelperUxFlow from '../assets/projects/houra/case study /exchange-journey/select-a-helper-uxflow.png';
 import twoJourneyDiagram from '../assets/projects/houra/case study /exchange-journey/two-journey-diagram.png';
+import chatVisual from '../assets/projects/houra/case study /trust/chat-visual.png';
+import userProfileAnimation from '../assets/projects/houra/case study /trust/user-profile-animation.webm';
 import helpingVerticalScrollingAnimation from '../assets/projects/houra/case study /participation/helping-verticalscrolling-animation.webm';
 import gettingHelpVerticalScrollingAnimation from '../assets/projects/houra/case study /participation/gettinghelp-verticalscrolling-animation.webm';
 
@@ -519,26 +521,34 @@ export const houraCaseStudyContent = {
           'Before committing to an exchange, members can review identity, skills, location, previous activity and feedback to build a clearer picture of the person they may interact with.',
         media: {
           label: 'Profile and reviews prototype',
-          aspectRatio: '16 / 9',
+          aspectRatio: '544 / 1080',
+          alt: 'Animated Houra profile showing identity, skills, previous activity and member feedback.',
+          decorative: false,
+          embedded: true,
+          theme: 'bare',
+          videoSources: [
+            {
+              src: userProfileAnimation,
+              type: 'video/webm',
+            },
+          ],
         },
-        caption:
-          'Profile information and previous feedback make reputation visible before the first interaction.',
       },
       {
         label: 'Before meeting',
         title: 'Reduce uncertainty through conversation',
         description:
           'Chat gives both members a private space to clarify the request, align expectations and agree on practical details before meeting in person.',
-        media: [
-          {
-            label: 'Pre-exchange conversation',
-            aspectRatio: '4 / 5',
-          },
-          {
-            label: 'Scheduling agreement',
-            aspectRatio: '3 / 4',
-          },
-        ],
+        media: {
+          label: 'Pre-exchange conversation and scheduling agreement',
+          src: chatVisual,
+          alt: 'Houra chat list and conversation screens showing schedule coordination before an exchange.',
+          aspectRatio: '2728 / 2900',
+          decorative: false,
+          embedded: true,
+          objectFit: 'contain',
+          theme: 'bare',
+        },
         notes: [
           'Clarify the request',
           'Align expectations',
@@ -573,8 +583,6 @@ export const houraCaseStudyContent = {
           'Assess whether profiles, reviews, chat and scheduling provide sufficient confidence before an in-person activity.',
       },
     ],
-    methods:
-      'Suggested methods: concept testing, moderated task-based prototype sessions, service walkthroughs, diary studies and small community pilots.',
   },
   reflection: {
     id: 'reflection',
@@ -599,7 +607,5 @@ export const houraCaseStudyContent = {
           'My Activity, request-led participation, profile signals, chat and scheduling are not isolated features. They are product expressions of the wider service model.',
       },
     ],
-    closing:
-      'The interface supports the exchange, but the service rules make the exchange possible.',
   },
 };

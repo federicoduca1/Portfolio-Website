@@ -4,6 +4,7 @@ export default function ServiceEditorialList({
   layout = 'rows',
   numbered = true,
   showOuterBorders = true,
+  alignDescriptionWithTitle = false,
   tone = 'light',
 }) {
   const isDark = tone === 'dark';
@@ -94,11 +95,13 @@ export default function ServiceEditorialList({
           {heading}
         </h3>
       ) : null}
-      <ol className={`mt-7 border-t ${borderClass}`}>
+      <ol className={`mt-7 ${showOuterBorders ? 'border-t' : ''} ${borderClass}`}>
         {items.map((item, index) => (
           <li
             key={item.title}
-            className={`grid gap-4 border-b py-7 sm:grid-cols-[3rem_minmax(12rem,0.7fr)_minmax(0,1fr)] sm:gap-6 sm:py-8 ${borderClass}`}
+            className={`grid gap-4 py-7 sm:grid-cols-[3rem_minmax(12rem,0.7fr)_minmax(0,1fr)] sm:gap-6 sm:py-8 ${
+              showOuterBorders || index < items.length - 1 ? 'border-b' : ''
+            } ${borderClass}`}
           >
             {numbered ? (
               <span className="text-sm font-semibold tabular-nums text-[var(--project-accent)]">
@@ -117,7 +120,11 @@ export default function ServiceEditorialList({
                 {item.title}
               </h4>
             </div>
-            <p className={`max-w-[42rem] text-base leading-[1.7] sm:text-lg ${bodyClass}`}>
+            <p
+              className={`max-w-[42rem] text-base leading-[1.7] sm:text-lg ${
+                alignDescriptionWithTitle && item.label ? 'sm:mt-7' : ''
+              } ${bodyClass}`}
+            >
               {item.description}
             </p>
           </li>

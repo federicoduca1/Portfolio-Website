@@ -3,6 +3,7 @@ import CaseStudySection from '../../case-study/CaseStudySection.jsx';
 import EditorialStatement from '../../case-study/EditorialStatement.jsx';
 import GuidedStickySequence from '../../case-study/GuidedStickySequence.jsx';
 import JourneyRoleSection from '../../case-study/JourneyRoleSection.jsx';
+import ReflectionStickySequence from '../../case-study/ReflectionStickySequence.jsx';
 import ServiceEditorialList from '../../case-study/ServiceEditorialList.jsx';
 import ServiceQuestionBlock from '../../case-study/ServiceQuestionBlock.jsx';
 import SystemEquation from '../../case-study/SystemEquation.jsx';
@@ -202,32 +203,33 @@ function ValidationSection({ content }) {
       <ServiceEditorialList
         items={content.areas}
         layout="rows"
+        showOuterBorders={false}
+        alignDescriptionWithTitle
       />
-
-      <p className="mt-14 border-t border-neutral-300 pt-7 text-base leading-[1.7] text-neutral-600 sm:text-lg">
-        {content.methods}
-      </p>
     </CaseStudySection>
   );
 }
 
 function ReflectionSection({ content }) {
+  const steps = content.blocks.map((block, index) => ({
+    id: `houra-reflection-${index + 1}`,
+    label: block.title,
+    body: block.description,
+  }));
+
   return (
     <CaseStudySection
       {...content}
       width="wide"
-      theme="neutral"
-      className={sectionClassName}
+      theme="light"
+      className="!pt-16 !pb-28 sm:!pt-20 sm:!pb-36 lg:!pt-24 lg:!pb-44"
     >
-      <ServiceEditorialList
-        items={content.blocks}
-        layout="columns"
-        numbered={false}
-      />
-
-      <EditorialStatement accent="primary" className="mt-16 sm:mt-20">
-        {content.closing}
-      </EditorialStatement>
+      <div className="mt-6 max-w-[68rem] sm:mt-10">
+        <ReflectionStickySequence
+          labelTone="muted"
+          steps={steps}
+        />
+      </div>
     </CaseStudySection>
   );
 }

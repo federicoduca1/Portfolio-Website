@@ -3,27 +3,26 @@ import CaseStudyMediaPlaceholder from './CaseStudyMediaPlaceholder.jsx';
 function ProfileTrustChapter({ chapter }) {
   return (
     <section>
-      <header className="max-w-[48rem]">
-        <p className="text-xs font-semibold tracking-[0.13em] text-[var(--project-accent)] uppercase sm:text-sm">
-          {chapter.label}
-        </p>
-        <h3 className="mt-4 max-w-[20ch] text-[clamp(2.25rem,4vw,4rem)] leading-[1.06] font-medium">
-          {chapter.title}
-        </h3>
-        <p className="mt-6 max-w-[44rem] text-lg leading-[1.7] text-neutral-600 sm:text-xl">
-          {chapter.description}
-        </p>
-      </header>
+      <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
+        <header>
+          <p className="text-xs font-semibold tracking-[0.13em] text-[var(--project-accent)] uppercase sm:text-sm">
+            {chapter.label}
+          </p>
+          <h3 className="mt-4 max-w-[20ch] text-[clamp(2.25rem,4vw,4rem)] leading-[1.06] font-medium">
+            {chapter.title}
+          </h3>
+          <p className="mt-6 text-lg leading-[1.7] text-neutral-600 sm:text-xl">
+            {chapter.description}
+          </p>
+        </header>
 
-      <div className="mt-10 max-w-[62rem] sm:mt-12">
-        <CaseStudyMediaPlaceholder
-          {...chapter.media}
-          theme="soft"
-          width="full"
-        />
-        <p className="mt-4 max-w-[44rem] text-sm leading-[1.65] text-neutral-500 sm:text-base">
-          {chapter.caption}
-        </p>
+        <div className="w-full max-w-[22rem] justify-self-center sm:max-w-[24rem] lg:mt-11 lg:w-[58%] lg:max-w-none">
+          <CaseStudyMediaPlaceholder
+            {...chapter.media}
+            theme={chapter.media.theme ?? 'soft'}
+            width="full"
+          />
+        </div>
       </div>
     </section>
   );
@@ -32,7 +31,7 @@ function ProfileTrustChapter({ chapter }) {
 function CoordinationTrustChapter({ chapter }) {
   return (
     <section className="mt-20 border-t border-neutral-300 pt-14 sm:mt-24 sm:pt-16 lg:mt-28 lg:pt-20">
-      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(20rem,0.8fr)] lg:gap-16 xl:gap-20">
+      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
         <header className="lg:order-2">
           <p className="text-xs font-semibold tracking-[0.13em] text-[var(--project-accent)] uppercase sm:text-sm">
             {chapter.label}
@@ -56,15 +55,11 @@ function CoordinationTrustChapter({ chapter }) {
           </ul>
         </header>
 
-        <div className="grid gap-6 sm:grid-cols-2 sm:items-start lg:order-1">
+        <div className="lg:order-1">
           <CaseStudyMediaPlaceholder
-            {...chapter.media[0]}
-            theme="soft"
-          />
-          <CaseStudyMediaPlaceholder
-            {...chapter.media[1]}
-            className="sm:mt-16"
-            theme="light"
+            {...chapter.media}
+            theme={chapter.media.theme ?? 'soft'}
+            width="full"
           />
         </div>
       </div>

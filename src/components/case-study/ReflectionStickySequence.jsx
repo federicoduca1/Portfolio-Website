@@ -30,10 +30,17 @@ function useStickyReflection(enabled) {
   return isSticky;
 }
 
-function ReflectionStep({ step, className = '' }) {
+function ReflectionStep({ step, className = '', labelTone = 'accent' }) {
+  const labelClass =
+    labelTone === 'muted'
+      ? 'text-neutral-500'
+      : 'text-[var(--project-accent)]';
+
   return (
     <article className={className}>
-      <h3 className="text-xs font-semibold tracking-[0.13em] text-[var(--project-accent)] uppercase sm:text-sm">
+      <h3
+        className={`text-xs font-semibold tracking-[0.13em] uppercase sm:text-sm ${labelClass}`}
+      >
         {step.label}
       </h3>
       <p className="mt-5 max-w-[46rem] text-[clamp(1.35rem,2.25vw,2.15rem)] leading-[1.42] font-medium text-neutral-900">
@@ -79,12 +86,16 @@ function ReflectionProgress({ activeIndex, stepCount }) {
   );
 }
 
-function StackedReflection({ steps, stopMarkerId }) {
+function StackedReflection({ labelTone, steps, stopMarkerId }) {
   return (
     <div>
       <div className="space-y-16 sm:space-y-20">
         {steps.map((step) => (
-          <ReflectionStep key={step.id} step={step} />
+          <ReflectionStep
+            key={step.id}
+            step={step}
+            labelTone={labelTone}
+          />
         ))}
       </div>
       {stopMarkerId ? (
@@ -96,6 +107,7 @@ function StackedReflection({ steps, stopMarkerId }) {
 
 export default function ReflectionStickySequence({
   enabled = true,
+  labelTone = 'accent',
   sectionHeightPerStep = 64,
   steps = [],
   stopMarkerId,
@@ -165,6 +177,7 @@ export default function ReflectionStickySequence({
   if (!isSticky || steps.length < 2) {
     return (
       <StackedReflection
+        labelTone={labelTone}
         steps={steps}
         stopMarkerId={stopMarkerId}
       />
@@ -213,7 +226,10 @@ export default function ReflectionStickySequence({
                       : `${translateClass} pointer-events-none opacity-0`
                   }`}
                 >
-                  <ReflectionStep step={step} />
+                  <ReflectionStep
+                    step={step}
+                    labelTone={labelTone}
+                  />
                 </div>
               );
             })}
