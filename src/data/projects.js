@@ -2,6 +2,7 @@ import houraPhoneVisualOne from '../assets/card-visual/houra-project/phone-visua
 import houraPhoneVisualTwo from '../assets/card-visual/houra-project/phone-visual-2.png';
 import nintendoSwitchCoverVisual from '../assets/card-visual/nintendo-project/switch-cover-visual.png';
 import { houraProjectConfig } from './houraCaseStudy.js';
+import { inFrameProjectConfig } from './inFrameCaseStudy.js';
 import { nintendoProjectConfig } from './nintendoCaseStudy.js';
 
 export const projects = [
@@ -89,10 +90,11 @@ export const projectIndexProjects = [
     },
   },
   {
-    id: 'inframe',
-    slug: 'inframe',
-    title: 'InFrame',
-    year: '2026',
+    id: inFrameProjectConfig.id,
+    slug: inFrameProjectConfig.slug,
+    path: inFrameProjectConfig.path,
+    title: inFrameProjectConfig.title,
+    year: inFrameProjectConfig.year,
     mediums: ['MOBILE'],
     metadata: 'MOBILE · PRODUCT DESIGN · UX/UI',
     description:

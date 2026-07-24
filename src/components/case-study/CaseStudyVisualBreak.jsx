@@ -158,6 +158,7 @@ export default function CaseStudyVisualBreak({
   media,
   mediaAlignment = 'left',
   mediaFlushBottom = false,
+  mediaFlushTopSpacing = 'compact',
   mediaFrame = 'framed',
   mediaWidth = '82%',
   placeholderLabel,
@@ -170,12 +171,16 @@ export default function CaseStudyVisualBreak({
   const isDark = theme === 'dark';
   const isCompact = spacing === 'compact';
   const wideSpacingClass = mediaFlushBottom
-    ? 'pt-12 pb-0 sm:pt-14 lg:pt-16'
+    ? mediaFlushTopSpacing === 'standard'
+      ? 'pt-16 pb-0 sm:pt-20 lg:pt-24'
+      : 'pt-12 pb-0 sm:pt-14 lg:pt-16'
     : isCompact
       ? 'py-12 sm:py-14 lg:py-16'
       : 'py-16 sm:py-20 lg:py-24';
   const containedSpacingClass = mediaFlushBottom
-    ? 'pt-14 pb-0 sm:pt-16 lg:pt-20'
+    ? mediaFlushTopSpacing === 'standard'
+      ? 'pt-20 pb-0 sm:pt-24 lg:pt-32'
+      : 'pt-14 pb-0 sm:pt-16 lg:pt-20'
     : isCompact
       ? 'py-14 sm:py-16 lg:py-20'
       : 'py-20 sm:py-24 lg:py-32';

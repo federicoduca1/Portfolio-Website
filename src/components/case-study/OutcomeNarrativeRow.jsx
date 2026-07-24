@@ -9,7 +9,8 @@ export default function OutcomeNarrativeRow({
   separator = true,
   title,
 }) {
-  const Heading = headingLevel === 5 ? 'h5' : 'h4';
+  const Heading =
+    headingLevel === 3 ? 'h3' : headingLevel === 5 ? 'h5' : 'h4';
   const titleClass = prominent
     ? 'text-xl sm:text-2xl'
     : compact

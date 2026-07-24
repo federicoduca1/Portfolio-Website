@@ -25,6 +25,7 @@ export default function CaseStudyMediaPlaceholder({
   autoPlay = true,
   backgroundColor,
   blendMode = 'normal',
+  breakoutPosition = 'default',
   caption,
   className = '',
   decorative = true,
@@ -50,6 +51,10 @@ export default function CaseStudyMediaPlaceholder({
   const hasVideo = videoSources.length > 0;
   const isPlaceholder = !hasImage && !hasVideo;
   const mediaLabel = alt || label;
+  const breakoutImageClass =
+    breakoutPosition === 'raised'
+      ? 'absolute -bottom-[8%] left-1/2 z-10 h-full w-auto max-w-none -translate-x-1/2 object-contain [clip-path:inset(0_0_8%_0)] sm:-bottom-[8%] sm:h-[112%] sm:[clip-path:inset(0_0_7.2%_0)] lg:-bottom-[10%] lg:h-[116%] lg:[clip-path:inset(0_0_8.7%_0)]'
+      : 'absolute -bottom-[18%] left-1/2 z-10 h-full w-auto max-w-none -translate-x-1/2 object-contain [clip-path:inset(0_0_18%_0)] sm:-bottom-[20%] sm:h-[112%] sm:[clip-path:inset(0_0_17.9%_0)] lg:-bottom-[22%] lg:h-[116%] lg:[clip-path:inset(0_0_19%_0)]';
 
   if (presentation === 'hero-breakout' && hasImage) {
     return (
@@ -67,7 +72,7 @@ export default function CaseStudyMediaPlaceholder({
             loading="eager"
             decoding="async"
             fetchPriority="high"
-            className="absolute -bottom-[18%] left-1/2 z-10 h-full w-auto max-w-none -translate-x-1/2 object-contain [clip-path:inset(0_0_18%_0)] sm:-bottom-[20%] sm:h-[112%] sm:[clip-path:inset(0_0_17.9%_0)] lg:-bottom-[22%] lg:h-[116%] lg:[clip-path:inset(0_0_19%_0)]"
+            className={breakoutImageClass}
             style={{ objectPosition }}
           />
         </div>
